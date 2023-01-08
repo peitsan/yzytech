@@ -1,10 +1,21 @@
 <template>
   <div class="wrapper">
     <div id="contactsBodyer">
-      <h2>选择青玖 选择品质</h2>
+      <h2>油自岩生 相伴油你 油之岩科技欢迎您的到访</h2>
       <div class="contactsMsg">
-        <div>
-          <img :src="contactWay.siteImg" alt="青玖科技有限公司地址" />
+        <div class="surround" >
+          <!-- <img :src="contactWay.siteImg" alt="重庆油之岩科技发展有限公司地址" /> 
+          -->
+          <!-- <iframe src="https://www.720yun.com/t/72fjOzwnsv2?scene_id=3155825" 
+          frameborder="no"
+          width="500px"
+          height="300px"
+          alt="重庆油之岩科技发展有限公司地址"></iframe> -->
+          <iframe src="https://map.baidu.com/poi/%E9%87%8D%E5%BA%86%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/@11868389,3422995,21z,87t?uid=844a750e01b56cba626858cd&ugc_type=3&ugc_ver=1&device_ratio=2&compat=1&pcevaname=pc4.1&querytype=detailConInfo&da_src=shareurl#panoid=61bf56a3d876176ab21e36cf&panotype=inter&heading=206.52&pitch=-63.09&l=21&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=1902920001160814131606733UZ&iid=61bf56a3d876176ab21e36cf&psp=%7B%22PanoIndoorPoiModule%22%3A%7B%22uid%22%3A%22844a750e01b56cba626858cd%22%7D%7D" 
+          frameborder="no"
+          width="600px"
+          height="350px"
+          alt="重庆油之岩科技发展有限公司地址"></iframe>
         </div>
         <ul>
           <li>
@@ -61,7 +72,7 @@ export default {
         qq: "",
         // 地址
         site: "重庆市南岸区南山街道崇文路2号“eYouSpace”众创空间202201号",
-        siteImg: "https://www.youzhiyan.com/assets/image/site.jpg"
+        siteImg: "http://139.9.81.3:233/image/site.jpg"
       }
     };
   },
@@ -82,8 +93,8 @@ export default {
 <style lang="less" scoped>
 .wrapper {
   #contactsBodyer {
-    width: 1200px;
-    margin: 90px auto 130px;
+    width: 85%;
+    margin: 90px 0% 130px 10% ;
     overflow: hidden;
     h2 {
       margin: 10px auto 30px;
@@ -104,10 +115,10 @@ export default {
       }
       ul {
         display: block;
-        width: 700px;
+        width: 600px;
         height: 230px;
         float: right;
-        margin: 40px auto;
+        margin: 40px 5% 0 0;
         line-height: 40px;
         font-size: 1.2em;
         padding-top: 70px;
@@ -128,8 +139,9 @@ export default {
       margin: 40px auto 10px;
       width: 100%;
       .contactsMsg {
-        div {
-          width: 93%;
+       
+        .surround{
+          width: 200%;
           height: auto;
           margin: 20px auto;
           float: none;

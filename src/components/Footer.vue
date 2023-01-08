@@ -46,7 +46,7 @@ export default {
     return {
       contactWay: {
         // 官方微信服务号
-        weChat: "https://www.youzhiyan.com/assets/image/WeChat.png",
+        weChat: "http://139.9.81.3:233/image/WeChat.png",
         // 网站底部部邮箱
         email: "cqyzytech@163.com",
         // 网站底部电话

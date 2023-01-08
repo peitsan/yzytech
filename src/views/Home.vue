@@ -90,11 +90,13 @@
         </ul>
       </div>
       <div class="ourFriends">
-        <h2>我们的伙伴</h2>
-        <h3>Our Friends</h3>
+        <h2>合 作 伙 伴</h2>
+        <h3>Strategic Partners</h3>
         <ul>
           <li v-for="(item,index) in ourFriends" :key="index">
+            <a :href="item.link">
             <img v-lazy="item.src" :alt="item.alt" />
+            </a>
           </li>
         </ul>
       </div>
@@ -136,54 +138,62 @@ export default {
       bannerHeight: "", //轮播图高度
       homeBanner: [
         {
-          src: "https://www.youzhiyan.com/assets/image/banner1.jpg",
+          src: "http://139.9.81.3:233/image/banner1.png",
           alt: "业界领先\"油基岩屑处置\"方案服务提供商"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/banner2.jpg",
+          src: "http://139.9.81.3:233/image/banner2.png",
           alt: "页岩油开采副产品、钻井原液、绿肥、免烧砖原料、柴油汽油"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/banner3.jpg",
-          alt: "数字化服务管理平台、智慧+页岩油开采"
+          src: "http://139.9.81.3:233/image/banner3.png",
+          alt: "多位学术泰斗认可推荐,油气处置技术专业研发团队"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/banner3.jpg",
-          alt: "多位学术泰斗认可推荐,油气处置技术专业研发团队"
+          src: "http://139.9.81.3:233/image/banner4.jpg",
+          alt: "数字化服务管理平台、智慧+页岩油开采"
         }
       ],
       ourFriends: [
         {
-          src: "https://www.youzhiyan.com/assets/image/friends1.png",
-          alt: "阿里巴巴"
+          src: "http://139.9.81.3:233/image/co1.png",
+          alt: "油气藏地质及开发工程国家重点实验室",
+          link: "https://www.swpu.edu.cn/lab/"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/friends2.png",
-          alt: "腾讯公益"
+          src: "http://139.9.81.3:233/image/co2.png",
+          alt: "华为云",
+          link: "https://activity.huaweicloud.com/"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/friends3.png",
-          alt: "途客租车"
+          src: "http://139.9.81.3:233/image/co3.png",
+          alt: "新网数码",
+          link: "https://www.xinnet.com/"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/friends4.png",
-          alt: "壹想食"
+          src: "http://139.9.81.3:233/image/co4.png",
+          alt: "中国科学院重庆绿色智能技术研究院",
+          link:"http://www.cigit.cas.cn/"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/friends5.png",
-          alt: "腾讯"
+          src: "http://139.9.81.3:233/image/co5.png",
+          alt: "西南四校",
+          link:"https://www.swpu.edu.cn/"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/friends6.png",
-          alt: "Adobe"
+          src: "http://139.9.81.3:233/image/co6.png",
+          alt: "eyouspace众创空间",
+          link:"http://siee.cqupt.edu.cn/"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/friends7.png",
-          alt: "新网"
+          src: "http://139.9.81.3:233/image/co7.png",
+          alt: "聚购科技",
+          link:"https://www.juugoo.com/"
         },
         {
-          src: "https://www.youzhiyan.com/assets/image/friends8.png",
-          alt: "微软"
+          src: "http://139.9.81.3:233/image/co8.png",
+          alt: "腾讯公益",
+          link:"https://gongyi.qq.com/"
         }
       ]
     };

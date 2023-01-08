@@ -1,55 +1,67 @@
 {
     "meta": {
-        "title": "青玖科技有限公司官网-微信小程序定制-公众号定制-网站专业定制开发-app定制-运营推广-营销-十年从业经验专业技术团队",
-        "keywords": "网站定制,公众号定制,小程序定制,app定制,运营推广,营销,定制开发,做网站,做小程序,做软件,定制开发",
+        "title": "重庆油之岩科技发展有限公司-油基岩屑处置-油基岩油气副产品-处置水平业界领先-双碳减排技术研发-院士专家青睐的油气处置",
+        "keywords": "油基岩屑处置方案,钻井原液,绿化肥料,免烧砖原料,柴油,汽油,教育部智库研发,数字化平台",
         "description": "描述"
     },
-    "homeBanner": [
+    "homeBanner":[
         {
-            "src": "https://www.youzhiyan.com/assets/image/banner1.jpg",
-            "alt": "网站、小程序、公众号、APP专业定制开发"
+          "src": "http://139.9.81.3:233/image/banner1.png",
+          "alt": "业界领先\"油基岩屑处置\"方案服务提供商"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/banner2.jpg",
-            "alt": "顶级品牌、顶级售后、顶级产品、办公工具、网址导航"
+          "src": "http://139.9.81.3:233/image/banner2.png",
+          "alt": "页岩油开采副产品、钻井原液、绿肥、免烧砖原料、柴油汽油"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/banner3.jpg",
-            "alt": "免费赠首年服务器、三个月免费运维、免费培训"
+          "src": "http://139.9.81.3:233/image/banner3.png",
+          "alt": "多位学术泰斗认可推荐,油气处置技术专业研发团队"
+        },
+        {
+          "src": "http://139.9.81.3:233/image/banner4.jpg",
+          "alt": "数字化服务管理平台、智慧+页岩油开采"
         }
-    ],
-    "ourFriends": [
+      ],
+      "ourFriends": [
         {
-            "src": "https://www.youzhiyan.com/assets/image/friends1.png",
-            "alt": "阿里巴巴"
+          "src": "http://139.9.81.3:233/image/co1.png",
+          "alt": "油气藏地质及开发工程国家重点实验室",
+          "link": "https://www.swpu.edu.cn/lab/"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/friends2.png",
-            "alt": "腾讯公益"
+           "src": "http://139.9.81.3:233/image/co2.png",
+          "alt": "华为云",
+          "link": "https://activity.huaweicloud.com/"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/friends3.png",
-            "alt": "途客租车"
+            "src": "http://139.9.81.3:233/image/co3.png",
+          "alt": "新网数码",
+          "link": "https://www.xinnet.com/"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/friends4.png",
-            "alt": "壹想食"
+            "src": "http://139.9.81.3:233/image/co4.png",
+          "alt": "中国科学院重庆绿色智能技术研究院",
+          "link":"http://www.cigit.cas.cn/"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/friends5.png",
-            "alt": "腾讯"
+            "src": "http://139.9.81.3:233/image/co5.png",
+          "alt": "西南四校",
+          "link":"https://www.swpu.edu.cn/"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/friends6.png",
-            "alt": "Adobe"
+            "src": "http://139.9.81.3:233/image/co6.png",
+          "alt": "eyouspace众创空间",
+          "link":"http://siee.cqupt.edu.cn/"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/friends7.png",
-            "alt": "新网"
+            "src": "http://139.9.81.3:233/image/co7.png",
+          "alt": "聚购科技",
+          "link":"https://www.juugoo.com/"
         },
         {
-            "src": "https://www.youzhiyan.com/assets/image/friends8.png",
-            "alt": "微软"
+          "src": "http://139.9.81.3:233/image/co8.png",
+          "alt": "腾讯公益",
+          "link":"https://gongyi.qq.com/"
         }
-    ]
+      ]
 }

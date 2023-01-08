@@ -20,7 +20,10 @@
         <!-- 公司logo -->
         <h1>
           <a href="https://www.youzhiyan.com/">
-            <img src="<%= BASE_URL %>cqyzyLogo.png" alt="油之岩科技发展有限公司" />
+            <img src="http://139.9.81.3:233/logo.png" width="10%" alt="油之岩科技发展有限公司" />
+            <span>
+            重庆油之岩科技
+            </span>
           </a>
         </h1>
         <!-- 响应式导航栏按钮 -->
@@ -141,8 +144,10 @@ export default {
         float: left;
         line-height: 100px;
         img {
-          width: 190px;
-          height: 60px;
+          width: 90px;
+          height: 80px;
+        }
+        span{
           margin-right: 30px;
         }
       }
@@ -191,7 +196,7 @@ export default {
             font-size: 0.6em;
             line-height: 32px;
             i {
-              margin: 0px 5px;
+              margin: 0px 0px;
             }
           }
         }

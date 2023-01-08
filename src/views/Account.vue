@@ -6,7 +6,7 @@
         <i class="iconfont icon-sanjiaoyou"></i> 公众号定制
       </p>
       <div>
-        <img src="https://www.youzhiyan.com/assets/image/account.jpg" alt="微信公众号,订阅号,服务号,企业号,定制开发,专业团队,设计,创意,文案,推广,运营" />
+        <img src="http://139.9.81.3:233/image/account.jpg" alt="微信公众号,订阅号,服务号,企业号,定制开发,专业团队,设计,创意,文案,推广,运营" />
       </div>
     </div>
   </div>

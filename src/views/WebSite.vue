@@ -62,7 +62,7 @@
           </li>
         </ul>
         <div class="browserImg">
-          <img src="https://www.youzhiyan.com/assets/image/browser.jpg" alt="主流浏览器" />
+          <img src="http://139.9.81.3:233/image/browser.jpg" alt="主流浏览器" />
         </div>
         <h3>承诺与优惠</h3>
         <ul>
