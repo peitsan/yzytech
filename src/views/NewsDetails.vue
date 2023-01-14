@@ -2,8 +2,8 @@
   <div class="wrapper">
     <div id="newsDetail">
       <p>
-        当前位置：首页
-        <i class="iconfont icon-sanjiaoyou"></i> 资讯详情
+       当前位置： <router-link style="color:grey" to="/home">首页</router-link>
+        <i class="iconfont icon-a-Icon_arrow-right"></i> 资讯详情
       </p>
       <!-- 新闻标题 -->
       <h2 v-text="newsTitle"></h2>

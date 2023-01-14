@@ -2,8 +2,8 @@
   <div class="wrapper">
     <div id="webSiteBodyer">
       <p>
-        当前位置：首页
-        <i class="iconfont icon-sanjiaoyou"></i> 网站定制
+       当前位置： <router-link style="color:grey" to="/home">首页</router-link>
+        <i class="iconfont icon-a-Icon_arrow-right"></i> 网站定制
       </p>
       <div>
         <h3>为什么要建设网站</h3>

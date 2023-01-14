@@ -6,7 +6,7 @@
         <ul>
           <li v-for="(item,index) in newsName" :key="index">
             <router-link :to="{name:'NewsDetails',params:{newsId:item.id}}">
-              <i class="iconfont icon-sanjiaoyou"></i>
+              <i class="iconfont icon-a-Icon_arrow-right"></i>
               <p v-text="item.title"></p>
               <span v-text="item.time"></span>
             </router-link>

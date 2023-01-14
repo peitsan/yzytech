@@ -58,28 +58,34 @@ const routes = [
   },
   // 以下为定制网站小程序公众号APP介绍页路由
   {
-    // 网站定制
-    path: '/webSite',
-    name: 'WebSite',
-    component: () => import('../views/WebSite.vue')
+    //经理服务
+    path: '/ManagerService',
+    name: 'ManagerService',
+    component: () => import('../views/ManagerService.vue')
   },
   {
-    // 小程序定制
-    path: '/applet',
-    name: 'Applet',
-    component: () => import('../views/Applet.vue')
+    // 加工链合作
+    path: '/Corperation',
+    name: 'Corperation',
+    component: () => import('../views/Corperation.vue')
   },
   {
-    // 公众号定制
-    path: '/account',
-    name: 'Account',
-    component: () => import('../views/Account.vue')
+    // 建筑原料
+    path: '/ContructionMaterial',
+    name: 'ContructionMaterial',
+    component: () => import('../views/ContructionMaterial.vue')
   },
   {
-    // app定制
-    path: '/appDevelopment',
-    name: 'AppDevelopment',
-    component: () => import('../views/AppDevelopment.vue')
+    // 石油原油
+    path: '/Oilforindustry',
+    name: 'Oilforindustry',
+    component: () => import('../views/Oilforindustry.vue')
+  },
+  {
+    // 解决方案
+    path: '/Solution',
+    name: 'Solution',
+    component: () => import('../views/Solution.vue')
   }
   ,
   {

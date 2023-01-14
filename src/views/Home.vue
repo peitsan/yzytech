@@ -8,40 +8,42 @@
     <!-- bodyer开始 -->
     <div id="homeBodyer">
       <div class="ourService">
-        <h2>我们的服务</h2>
-        <h3>Our Service</h3>
+        <h2>公 司 业 务</h2>
+        <h3>
+Corporation Business</h3>
         <ul>
           <li>
-            <router-link to="/webSite">
-              <i class="iconfont icon-wangzhan"></i>
-              <h3></h3>
-              <p>Website custom</p>
+            <router-link to="/Corperation">
+              <i class="iconfont icon-guanliancailiao"></i>
+              <h3>岩油加工产链合作</h3>
+              <p>B2B Contract</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/applet">
-              <i class="iconfont icon-xiaochengxu"></i>
-              <h3>小程序定制</h3>
-              <p>Applet customization</p>
+            <router-link to="/Oilforindustry">
+              <i class="iconfont icon-Bio-Gas"></i>
+              <h3>工业油&岩油馏分</h3>
+              <p>Oil&Material For Industry</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/account">
-              <i class="iconfont icon-gongzhonghaoguanli"></i>
-              <h3>公众号定制</h3>
-              <p>Customized public account</p>
+            <router-link to="/ContructionMaterial">
+              <i class="iconfont icon-cailiaokufang"></i>
+              <h3>建筑业原材料</h3>
+              <p>
+Raw Materials for Construction</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/appDevelopment">
-              <i class="iconfont icon-ruanjiankaifabao"></i>
-              <h3>APP定制</h3>
-              <p>APP development</p>
+            <router-link to="/Solution">
+              <i class="iconfont icon-service1"></i>
+              <h3>岩油废油处置方案</h3>
+              <p>Plan Of Waste Oil Disposal</p>
             </router-link>
           </li>
         </ul>
       </div>
-      <div class="discounts">
+      <!-- <div class="discounts">
         <h2>优惠活动</h2>
         <h3>Discounts</h3>
         <ul>
@@ -62,7 +64,7 @@
             <strong>免费培训使用方法</strong>
           </li>
         </ul>
-      </div>
+      </div> -->
       <div class="workFlow">
         <h2>工作流程</h2>
         <h3>Work Flow</h3>

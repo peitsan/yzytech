@@ -13,12 +13,12 @@
           alt="重庆油之岩科技发展有限公司地址"></iframe> -->
           <iframe src="https://map.baidu.com/poi/%E9%87%8D%E5%BA%86%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6/@11868389,3422995,21z,87t?uid=844a750e01b56cba626858cd&ugc_type=3&ugc_ver=1&device_ratio=2&compat=1&pcevaname=pc4.1&querytype=detailConInfo&da_src=shareurl#panoid=61bf56a3d876176ab21e36cf&panotype=inter&heading=206.52&pitch=-63.09&l=21&tn=B_NORMAL_MAP&sc=0&newmap=1&shareurl=1&pid=1902920001160814131606733UZ&iid=61bf56a3d876176ab21e36cf&psp=%7B%22PanoIndoorPoiModule%22%3A%7B%22uid%22%3A%22844a750e01b56cba626858cd%22%7D%7D" 
           frameborder="no"
-          width="600px"
+          width="120%"
           height="350px"
           alt="重庆油之岩科技发展有限公司地址"></iframe>
         </div>
         <ul>
-          <li>
+          <!-- <li>
             <i class="iconfont icon-dianhua"></i>
             <a :href="'tel:'+contactWay.tel" v-text="contactWay.tel"></a>
           </li>
@@ -28,13 +28,13 @@
               :href="'tencent://message/?uin=' + contactWay.qq + '&Site=&Menu=yes'"
               v-text="contactWay.qq"
             ></a>
-          </li>
+          </li> -->
           <li>
-            <i class="iconfont icon-youxiang-"></i>
+            <i class="iconfont icon-shangye"></i>
             <a :href="'mailto:'+contactWay.email" v-text="contactWay.email"></a>
           </li>
           <li>
-            <i class="iconfont icon-dizhi"></i>
+            <i class="iconfont icon-shangye"></i>
             <a href="#" v-text="contactWay.site"></a>
           </li>
         </ul>
@@ -115,7 +115,7 @@ export default {
       }
       ul {
         display: block;
-        width: 600px;
+        width: 50%;
         height: 230px;
         float: right;
         margin: 40px 5% 0 0;
@@ -151,7 +151,7 @@ export default {
           }
         }
         ul {
-          width: 90%;
+          width: 80%;
           float: none;
           margin: 20px auto;
           padding-top: 0;
