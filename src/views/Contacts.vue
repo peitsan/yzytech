@@ -72,7 +72,7 @@ export default {
         qq: "",
         // 地址
         site: "重庆市南岸区南山街道崇文路2号“eYouSpace”众创空间202201号",
-        siteImg: "http://139.9.81.3:233/image/site.jpg"
+        siteImg: "https://resource.youzhiyan.cn/image/site.jpg"
       }
     };
   },

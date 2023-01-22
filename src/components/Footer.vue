@@ -28,7 +28,7 @@
       <div class="qjtcoCopyright">
         <h4>
           <p v-text="footer.copyright"></p>
-          <span v-text="footer.icp"></span>
+          <a href="https://beian.miit.gov.cn/"><span v-text="footer.icp"></span> </a>
           <span class="spannone">|</span>
           <span v-text="footer.institutionCode"></span>
           <span class="spannone">|</span>
@@ -46,7 +46,7 @@ export default {
     return {
       contactWay: {
         // 官方微信服务号
-        weChat: "http://139.9.81.3:233/image/WeChat.png",
+        weChat: "https://resource.youzhiyan.cn/image/WeChat.png",
         // 网站底部部邮箱
         email: "cqyzytech@163.com",
         // 网站底部电话
@@ -57,7 +57,7 @@ export default {
       footer: {
         // 版权信息一般不会轻易改变此处信息不从服务器获取
         copyright: "Copyright © 2023 - 2024 Chongqing Youzhiyan Technology Development Co. All Rights Reserved.",
-        icp: "渝ICP备------号",
+        icp: "渝ICP备2023000301号",
         institutionCode: "组织机构代码:MAACBA2T-3  ",
         vieID: "社会信用代码:91500108MAACBA2T3T"
       }

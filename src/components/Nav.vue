@@ -20,7 +20,7 @@
         <!-- 公司logo -->
         <h1>
           <a href="https://www.youzhiyan.com/">
-            <img src="http://139.9.81.3:233/logo.png" width="10%" alt="油之岩科技发展有限公司" />
+            <img src="https://resource.youzhiyan.cn/logo.png" width="10%" alt="油之岩科技发展有限公司" />
             <span>
             重庆油之岩科技
             </span>
@@ -53,51 +53,177 @@
           <li>
             <router-link to="/employ">相约油之岩</router-link>
           </li>
+          <!-- 未登录态 -->
+          <li v-if="!this.isLogin" >
+            <el-popover
+              id = "login"
+              placement="bottom"
+              width="300"
+              trigger="hover"
+              :v-model="this.popVisible"
+              >  
+               <div style="
+                width:300px;
+                text-align: center;
+                font-size:large;
+                font-weight: 600;"> 
+                  登录后您可以:
+                </div>
+                <div style="width:300;
+                      margin: 0 30px;
+                      line-height:45px;
+                      display: flex;
+                      flex-flow: inline;"> 
+                  <div style="width:120px;
+                        margin: 0 10px; 
+                      ">
+                    <i style="width:10px,color:#000" class="iconfont icon-Tab_lishijilu"></i>回溯服务进度</div>
+                  <div style="width:120px;
+                  margin: 0 10px; 
+                     "> <i style="width:10px" class="iconfont icon-Tab_goumaifuwu"></i>体验平台功能</div>
+                </div>
+
+                <div style="width:300;
+                      margin: 0 30px;
+                      line-height:45px;
+                      display: flex;
+                      flex-flow: inline;"> 
+                  <div style="width:120px;
+                        margin: 0 10px; 
+                      ">
+                    <i style="width:10px" class="iconfont icon-service"></i>专员经理咨询</div>
+                  <div style="width:120px;
+                    margin: 0 10px; 
+                     "> <i style="width:10px" class="iconfont icon-Icon_template"></i>了解产品详情</div>
+                </div>
+                <el-button  type="primary"
+                        autofocus
+                        round
+                        style="
+                        margin: 5% 4%;
+                        width:280px;
+                        background-color: #B2CAFE;
+                        " 
+                        @click="()=>{this.loginModalStatus=true }">
+                        登录</el-button>
+                <div style="
+                    text-align: center;
+                    font-size:medium;
+                    font-weight: 500;
+                    margin:0 8px " > 
+                  <span>首次使用,</span>
+                  <span
+                  id="registerAlink"
+                  style="color:#89AFE0;
+                    text-align: center;
+                    font-size:medium;
+                    font-weight: 500;
+                    margin:0 8px"
+                    >
+                    <el-button type="text" @click="()=>{this.registerModalStatus = true}">这里注册!</el-button>
+                  </span>
+                </div>
+              <el-avatar slot="reference">登录 
+              </el-avatar> 
+            </el-popover>
+           </li>
+           <!-- 登录态菜单 -->
+           <li v-if="this.isLogin" style="height:60px">
+               <el-dropdown >
+                    <el-avatar :src="this.userInfo.Avatar" @click="this.router.push('/UserCenter/User/index')">
+                    </el-avatar>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item icon="el-icon-user" @click.native="routerToUserCenter" >个人中心</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-goods" @click.native="routerToOrderCenter">我的订单</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-s-check" @click.native="routerToVerification">我的认证</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-d-arrow-right" @click.native="loginOut">注销登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+           </li>
         </ul>
       </div>
     </div>
     <!-- header结束 -->
-  </div>
+    <LoginRegisterModal
+    :registerModal="this.registerModalStatus" 
+    :loginModal="this.loginModalStatus"
+    @ModalStatus="modalCloseHandle"
+                />
+   </div>
 </template>
-
 <script>
+import {Dropdown,DropdownMenu,DropdownItem} from 'element-ui'
+import  LoginRegisterModal from '@/components/LoginModal.vue';
 export default {
-  props: ["contacts"],
-  data() {
-    return {
-      contactWay: {
-        // 网站顶部邮箱
-        email: "cqyzytech@163.com",
-        // 网站顶部电话
-        tel: ""
-      },
-      navShow: true, //响应式情况下navShow控制navActive类控制导航栏是否显示
-      navBtnClass: "iconfont icon-daohang1"
-    };
-  },
-  methods: {
-    navbtn() {
-      // 通过class的变化控制导航按钮图标
-      this.navShow
-        ? (this.navBtnClass = "iconfont icon-guanbi")
-        : (this.navBtnClass = "iconfont icon-daohang1");
-      //通过navShow的取反控制是否绑定navActive类,控制菜单是否显示
-      this.navShow = !this.navShow;
+    props: ["contacts"],
+    components: {
+      LoginRegisterModal,Dropdown,DropdownMenu,DropdownItem
     },
-    navhidden() {
-      // 修复路由跳转后菜单不收起的bug
-      this.navShow = !this.navShow;
-      this.navBtnClass = "iconfont icon-daohang1";
-    }
-  },
-  created() {
-    // 将父组件props传递过来的值赋给data中contactWay
-    this.contactWay = this.contacts;
-  }
+    mounted() {
+    },
+    data() {
+        return {
+            registerModalStatus:false,
+            loginModalStatus:false,
+            popVisible: false,
+            userInfo:{
+              Avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+            },
+            isLogin: true,
+            contactWay: {
+                // 网站顶部邮箱
+                email: "cqyzytech@163.com",
+                // 网站顶部电话
+                tel: ""
+            },
+            navShow: true,
+            navBtnClass: "iconfont icon-daohang1"
+        };
+    },
+    methods: {
+      routerToUserCenter(){
+        this.$router.push('/UserCenter/User/index')
+      },
+      routerToOrderCenter(){
+        this.$router.push('/OrderCenter')
+      },
+      routerToVerification(){
+        this.$router.push('/UserCenter/Enterprise/index')
+      },
+        // 注销登录
+        loginOut(){
+          console.log('loginout')
+          this.isLogin = false;
+        },
+        modalCloseHandle(val){
+          if(!val){
+            this.registerModalStatus = false;
+            this.loginModalStatus = false;
+          }
+        },
+        navbtn() {
+            // 通过class的变化控制导航按钮图标
+            this.navShow
+                ? (this.navBtnClass = "iconfont icon-guanbi")
+                : (this.navBtnClass = "iconfont icon-daohang1");
+            //通过navShow的取反控制是否绑定navActive类,控制菜单是否显示
+            this.navShow = !this.navShow;
+        },
+        navhidden() {
+            // 修复路由跳转后菜单不收起的bug
+            this.navShow = !this.navShow;
+            this.navBtnClass = "iconfont icon-daohang1";
+        }
+    },
+    created() {
+        // 将父组件props传递过来的值赋给data中contactWay
+        this.contactWay = this.contacts;
+    },
 };
 </script>
 <style lang="less" scoped>
 .wrapper {
+  height: 92px;
   #header {
     // 顶部email和phone
     position: relative;
@@ -129,23 +255,27 @@ export default {
             margin: 0px 15px;
           }
         }
+        .userProfile{
+          height: 60px
+        }
       }
     }
     // 顶部导航栏及LOGO样式
     #nav {
       clear: both;
       width: 1200px;
-      height: 100px;
+      height: 60px;
       margin: auto;
       position: relative;
       z-index: 999;
       // LOGO
       h1 {
         float: left;
-        line-height: 100px;
+        margin-top: 5px;
+        line-height: 50px;
         img {
-          width: 90px;
-          height: 80px;
+          width: 50px;
+          height: 50px;
         }
         span{
           margin-right: 30px;
@@ -157,17 +287,30 @@ export default {
       }
       // 导航栏
       > ul {
-        line-height: 100px;
+        line-height: 50px;
         > li {
           float: left;
           a {
             display: block;
             width: 100px;
             height: 40px;
-            margin: 30px 5px;
+            margin: 10px 5px;
             text-align: center;
             line-height: 40px;
             color: #000000;
+          }
+          span{
+            border-radius: 50%;
+            margin: 5px ;
+            float: right !important;
+            background: #D5DEEF;
+          
+          }
+          .title-h1{
+            width:200rpx;
+            text-align: center;
+            font-size:large;
+            font-weight: 600;
           }
           // 根据路有变化改变导航样式
           .router-link-exact-active {
@@ -180,6 +323,9 @@ export default {
             border-radius: 50px;
             color: #ffffff;
           }
+
+        
+          
         }
       }
     }
@@ -203,7 +349,7 @@ export default {
       }
       #nav {
         width: 100%;
-        height: 72px;
+        height: 60px;
         display: -webkit-flex;
         display: flex;
         justify-content: space-between;
@@ -217,9 +363,12 @@ export default {
           display: flex;
           align-items: center;
           img {
-            height: 52px;
-            width: auto;
+            height: 40px;
+            width: 40px;
             margin-left: 30px;
+          }
+          span{
+            font-size:18px;
           }
         }
         // 导航栏按钮样式
@@ -229,8 +378,10 @@ export default {
           height: 32px;
           line-height: 32px;
           margin-right: 30px;
-          i {
+         i {
             font-size: 1.8em;
+            color: #b9b9b9;
+            padding-right:40px;
           }
         }
         // 通过是否绑定navActive类控制导航显示
@@ -239,7 +390,7 @@ export default {
         }
         > ul {
           position: absolute;
-          top: 72px;
+          top: 50px;
           right: 0;
           z-index: 999;
           width: 240px;
@@ -252,6 +403,11 @@ export default {
             line-height: 43px;
             text-align: center;
             border-bottom: 1px solid #ffffff;
+            span{
+              background: #f7f7f7;
+              color: #000;
+              margin: 0 50px;
+            }
             a {
               width: 100%;
               height: 100%;

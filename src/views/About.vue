@@ -60,24 +60,24 @@ export default {
         publicBenefitImg: [
           {
             // 公益项目图片
-            src: "http://139.9.81.3:233/image/publicBenefit (1).jpg",
+            src: "https://resource.youzhiyan.cn/image/publicBenefit (1).jpg",
             // 公益项目图片描述
             alt: ""
           },
           {
-            src: "http://139.9.81.3:233/image/publicBenefit%20(2).jpg",
+            src: "https://resource.youzhiyan.cn/image/publicBenefit%20(2).jpg",
             alt: ""
           },
           {
-            src: "http://139.9.81.3:233/image/publicBenefit (3).jpg",
+            src: "https://resource.youzhiyan.cn/image/publicBenefit (3).jpg",
             alt: ""
           },
           {
-            src: "http://139.9.81.3:233/image/publicBenefit (4).jpg",
+            src: "https://resource.youzhiyan.cn/image/publicBenefit (4).jpg",
             alt: ""
           },
           {
-            src: "http://139.9.81.3:233/image/publicBenefit (5).jpg",
+            src: "https://resource.youzhiyan.cn/image/publicBenefit (5).jpg",
             alt: ""
           }
         ]

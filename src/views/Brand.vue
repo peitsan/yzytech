@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       brand: {
-        img: "http://139.9.81.3:233/image/TopServer.png",
+        img: "https://resource.youzhiyan.cn/image/banner2.png",
         title: "油之岩科技产品系列品牌",
         content: [
           "OilRock 为油之岩面向海外市场的国际化品牌",

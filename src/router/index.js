@@ -19,7 +19,6 @@ const routes = [
     component: () => import('../views/Brand.vue')
   },
   {
-    // 魅力青玖
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')
@@ -86,6 +85,26 @@ const routes = [
     path: '/Solution',
     name: 'Solution',
     component: () => import('../views/Solution.vue')
+  }
+  ,{
+    // 用户中心
+    path: '/UserCenter',
+    name: 'UserCenter',
+    component: () => import('../views/UserCenter.vue'),
+    children: [
+	    {
+			path: "/UserCenter/User/index",
+			component: () => import('../views/UserCenter/User.vue')
+		},
+    {
+			path: "/UserCenter/UserSafe/index",
+			component: () => import('../views/UserCenter/UserSafe.vue')
+		},
+		{
+			path: "/UserCenter/Enterprise/index",
+			component: () => import('../views/UserCenter/Verification.vue')
+		},
+	]
   }
   ,
   {

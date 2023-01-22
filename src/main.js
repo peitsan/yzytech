@@ -2,15 +2,74 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
+// 滑块验证码控件
+import SlideVerify from '../node_modules/vue-monoplasty-slide-verify' // 拼图验证码
+Vue.use(SlideVerify)
+
 // 引入iconfont字体库
 import '@/assets/font/iconfont.css'
 // 按需引入element-ui
-import { Carousel, CarouselItem, Pagination } from "element-ui";
+import { Carousel,
+         CarouselItem,
+         Pagination, 
+         Avatar, 
+         Popconfirm,
+         Popover,
+         Button,
+         Dialog,
+         Tabs,
+         TabPane,
+        RadioButton,
+        RadioGroup,
+        Input,
+        Form,
+        FormItem,
+        Dropdown,
+        DropdownMenu,
+        DropdownItem,
+        Menu,
+        MenuItem,
+        Submenu,
+        MenuItemGroup,
+        Col,
+         Row,
+        Container,
+        Aside,
+        Main,
+        Card} from "element-ui";
+Vue.use(Card);
+Vue.use(Container);
+Vue.use(Aside);
+Vue.use(Main);
+Vue.use(Col);
+Vue.use(Row);
+Vue.use(Menu);
+Vue.use(MenuItem);
+Vue.use(Submenu);
+Vue.use(MenuItemGroup);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Button);
+Vue.use(Input);
 // 首页element-ui轮播图
 Vue.use(Carousel);
 Vue.use(CarouselItem);
 // 行业资讯element-ui分页器
 Vue.use(Pagination);
+// 头像控制
+Vue.use(Avatar);
+// 交互气泡控制
+Vue.use(Popconfirm);
+Vue.use(Popover);
+Vue.use(Dialog);
+Vue.use(Tabs);
+Vue.use(TabPane);
+Vue.use(RadioButton);
+Vue.use(RadioGroup);
+
 // 引入vue-meta-info用于动态设置网页meta
 import MetaInfo from 'vue-meta-info'
 Vue.use(MetaInfo)
