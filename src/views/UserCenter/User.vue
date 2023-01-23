@@ -11,8 +11,17 @@
               </el-card>
           <el-card class="box-card">
            <el-col :span="4" class="avatarColumn">
-            <el-avatar :size="this.avatarSize" :src="this.userInfo.avatar">
+            <el-avatar v-if="!this.isChanging" :size="this.avatarSize" :src="this.userInfo.avatar">
             </el-avatar>
+            <el-upload v-if="this.isChanging"
+              class="avatar-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload">
+              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
           </el-col>
           <el-col :span="2"  >
           </el-col>
@@ -59,7 +68,7 @@
   </template>
   
   <script>
-  import { Row, Col, Card, Avatar, Button} from 'element-ui'
+  import { Row, Col, Card, Avatar, Button, Upload} from 'element-ui'
   export default {
     metaInfo: {
       title:
@@ -78,6 +87,7 @@
     },
     data() {
       return {
+        imageUrl: '',
         isChanging: false,
         avatarSize:120,
         userInfo:{
@@ -114,6 +124,23 @@
       }
     },
     methods:{
+      // 控制图像上传
+      handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      // 图像上传前校验文件类型与文件大小
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      },
       changingHandle(){
         this.isChanging = true;
       },
@@ -125,7 +152,7 @@
       
     },
     components:{
-    Row, Col, Card, Avatar, Button
+    Row, Col, Card, Avatar, Button, Upload
   }
   };
   </script>
@@ -151,6 +178,15 @@
         span{
           float:right
         }
+        .avatar-uploader{
+          height:18px;
+          width:18px;
+          margin:10px auto;
+          border:solid;
+          border-color:#acaaaa;
+          border-radius:100px;
+          padding:50px;
+        }
       }
       .box-card .infoColumn{
         margin : 0 auto;
@@ -163,12 +199,12 @@
         }
         .infoContent{
           font-size:14px;
-          line-height: 24px;
-          height:30px;
+          line-height: 20px;
+          height:24px;
           font-weight: 400;
         }
         .infoInput{
-          height: 30px;
+          height:24px;
           width: 95%;
         }
         }

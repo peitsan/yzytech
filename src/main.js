@@ -36,7 +36,9 @@ import { Carousel,
         Container,
         Aside,
         Main,
-        Card} from "element-ui";
+        Card,
+        Upload} from "element-ui";
+Vue.use(Upload);
 Vue.use(Card);
 Vue.use(Container);
 Vue.use(Aside);
