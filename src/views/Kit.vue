@@ -7,6 +7,7 @@
         <ul>
           <li v-for="(item2,index2) in item.list" :key="index2">
             <a :href="item2.href" v-text="item2.title"></a>
+            <!-- <router-link :to="{ name:'register',params:{'name':'San'} }">{{item2.title}}</router-link> -->
           </li>
         </ul>
       </div>
@@ -35,112 +36,27 @@ export default {
     return {
       kitItem: [
         {
-          itemClass: "转换类工具:",
+          itemClass: "产品服务:",
           list: [
             {
-              title: "pdf转word",
-              href: "#"
+              title: "产品订购",
+              href: "/OrderCenter/Productions"
             },
             {
-              title: "pdf转excel",
-              href: "#"
+              title: "服务询价",
+              href: "/OrderCenter/Service"
             },
-            {
-              title: "pdf转ppt",
-              href: "#"
-            },
-            {
-              title: "psd转png",
-              href: "#"
-            },
-            {
-              title: "psd转jpg",
-              href: "#"
-            },
-            {
-              title: "png转jpg",
-              href: "#"
-            },
-            {
-              title: "jpg转png",
-              href: "#"
-            }
           ]
         },
         {
-          itemClass: "下载工具:",
+          itemClass: "订单管理:",
           list: [
             {
-              title: "抖音视频无水印下载",
-              href: "#"
-            },
-            {
-              title: "今日头条视频下载",
-              href: "#"
-            },
-            {
-              title: "YouTube视频下载",
-              href: "#"
-            },
-            {
-              title: "bilibili视频下载",
-              href: "#"
-            }
+              title: "订单管理",
+              href: "/AdminCenter/Consumption/index"
+             }
           ]
         },
-        {
-          itemClass: "在线开发工具:",
-          list: [
-            {
-              title: "在线photoshop",
-              href: "#"
-            },
-            {
-              title: "在线压缩代码",
-              href: "#"
-            },
-            {
-              title: "在线json数据格式化",
-              href: "#"
-            },
-            {
-              title: "php在线工具",
-              href: "#"
-            },
-            {
-              title: "python在线工具",
-              href: "#"
-            },
-            {
-              title: "node.js在线工具",
-              href: "#"
-            },
-            {
-              title: "js压缩/解压工具",
-              href: "#"
-            },
-            {
-              title: "html压缩/解压工具",
-              href: "#"
-            },
-            {
-              title: "在线Markdown",
-              href: "#"
-            },
-            {
-              title: "在线图片压缩",
-              href: "#"
-            },
-            {
-              title: "rgb16进制工具",
-              href: "#"
-            },
-            {
-              title: "在线配色",
-              href: "#"
-            }
-          ]
-        }
       ]
     };
   },

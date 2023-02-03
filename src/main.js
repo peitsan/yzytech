@@ -5,11 +5,17 @@ import router from './router'
 // 滑块验证码控件
 import SlideVerify from '../node_modules/vue-monoplasty-slide-verify' // 拼图验证码
 Vue.use(SlideVerify)
-
+//地图地址选择器
+import BaiduMap from 'vue-baidu-map'
+Vue.use(BaiduMap, {
+  ak: 'QyuHV9sxjtaZ1w3RGCMwV1iFBiicqYXx'
+})
 // 引入iconfont字体库
 import '@/assets/font/iconfont.css'
 // 按需引入element-ui
-import { Carousel,
+import { 
+        Loading,
+        Carousel,
          CarouselItem,
          Pagination, 
          Avatar, 
@@ -37,7 +43,10 @@ import { Carousel,
         Aside,
         Main,
         Card,
-        Upload} from "element-ui";
+        Upload,
+        Message} from "element-ui";
+Vue.use(Loading.directive);
+Vue.use(Message);
 Vue.use(Upload);
 Vue.use(Card);
 Vue.use(Container);

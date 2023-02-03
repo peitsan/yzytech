@@ -1,21 +1,13 @@
 <template>
     <div class="wrapper">
-        <div id="OrderCenter">
-        <el-tabs v-model="tabView">
-            <el-tab-pane label="产品采购" name="productions"></el-tab-pane>
-            <el-tab-pane label="服务询价" name="service"></el-tab-pane>
-        </el-tabs>
-        <keep-alive>   
-         <component v-bind:is="tabView, tabChange(tabView)" style="background: #FF0000; width: 100%; height: 100%"></component>  
-        </keep-alive>
+        <div id="AdminCenter">、
+          
         </div>
     </div>
   </template>
   
   <script>
-  import Productions from './OrderCenter/Productions.vue'
-  import Service from './OrderCenter/Service.vue'
-   import {Menu,MenuItem,Row,Col,Tabs,TabPane} from 'element-ui'
+   import {Menu,MenuItem,Row,Col,Container,Aside,Main} from 'element-ui'
   export default {
     metaInfo: {
       title:
@@ -34,33 +26,20 @@
     },
     data() {
       return {
-        tabView:'Productions',
+   
       };
     },
-    methods:{
-      tabChange(tab){
-      if('Productions' == tab){
-        this.tabView = 'Productions'
- 
-      }else if('Service' == tab){
-        this.tabView = 'Service'
- 
-      }
-    },
-    },
     created() {
-      this.tabView = this.$route.params.OrderMode
+      
     },
     components:{
-      Menu,MenuItem,Row,Col,Productions,Service,Tabs,TabPane
+      Menu,MenuItem,Row,Col,Container,Aside,Main
     }
   };
   </script>
   <style lang="less" scoped>
   .wrapper {
-    #OrderCenter {
-      width: 80%;
-      margin:2% auto;
+    #AdminCenter {
       h2 {
         margin: 50px auto 30px;
         text-align: center;

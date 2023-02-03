@@ -54,12 +54,8 @@
                      <div class="infoSubTitle">   工作/岗位: </div>
                     <div class="infoContent" v-if="!this.isChanging">   {{ this.userInfo.jobs }} </div>
                     <el-input v-model="tmpInfo.jobs" class="infoInput" v-if="this.isChanging"></el-input>
-                  </el-col> 
-                  
-              </div>
-                     <div class="infoTitle">   经营地址: </div>
-                    <div class="infoContent" v-if="!this.isChanging">   {{ this.userInfo.managementAddress }} </div>
-                    <el-input v-model="tmpInfo.managementAddress" class="infoInput" v-if="this.isChanging"></el-input>  
+                  </el-col> </div>
+                 
               </el-row>
               <el-row :row="2" class="infoOperation">
                 <el-col v-if="!this.isChanging" :span="12"><el-button class="infoBtn" type="warning" @click="changingHandle" >修改</el-button></el-col>
@@ -100,7 +96,6 @@
           tel:"+86 18025597877",
           mail:"linpeican@lanshan.email",
           userType:"1", //用户类型, 0为普通用户,1为企业认证用户, 2为公司员工,3为公司超级管理员
-          managementAddress:"重庆邮电大学新行政楼1423教育信息化办公室蓝山工作室",
           enterpiseName:"信息化办蓝山工作室",//企业名称
           department:"前端研发部", //所属公司部门
           enterpiseType:"计算机/互联网/网络技术", //行业分类
@@ -112,7 +107,6 @@
           tel:"+86 18025597877",
           mail:"linpeican@lanshan.email",
           userType:"1", //用户类型, 0为普通用户,1为企业认证用户, 2为公司员工,3为公司超级管理员
-          managementAddress:"重庆邮电大学新行政楼1423教育信息化办公室蓝山工作室",
           enterpiseName:"信息化办蓝山工作室",//企业名称
           department:"前端研发部", //所属公司部门
           enterpiseType:"计算机/互联网/网络技术", //行业分类
@@ -196,24 +190,20 @@
       .box-card .infoColumn{
         margin : 0 auto;
         .infoTitle{
-          margin:12px 0;
           font-size:18px;
           font-weight: 600;
           .infoSubTitle{
-          margin:12px 0;
           font-size:15px;
           font-weight: 600;
         }
         .infoContent{
-          margin:-4px 0;
           font-size:14px;
           line-height: 20px;
           height:24px;
           font-weight: 400;
         }
         .infoInput{
-          margin-top:-10px;
-          height:0px;
+          height:24px;
           width: 95%;
         }
         }
@@ -222,7 +212,7 @@
           font-weight: 400;
         }
         .infoOperation{
-          margin: -20px 0; 
+          margin: -100px 0; 
           .infoBtn{
             border-radius: 30px;
             width:150px;
@@ -292,17 +282,9 @@
       }
       .box-card .avatarColumn{ 
         span{
-          width:10px;
-          height:10px;
+          width:50px;
+          height:50px;
           float:right
-        }
-        .avatar-uploader{
-          height:30px;
-          width:30px;
-          border:solid;
-          border-color:#acaaaa;
-          border-radius:60px;
-          padding:15px 0 0 15px;
         }
       }
       .box-card .infoColumn{

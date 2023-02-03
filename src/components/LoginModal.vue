@@ -13,7 +13,7 @@
           </el-radio-group>
         </div>
     <keep-alive>   
-      <component v-bind:is="tabView , tabChange(FunctionStatus)" style="background: #FF0000; width: 100%; height: 100%"></component>  
+      <component v-bind:is="tabView, tabChange(FunctionStatus)" style="background: #FF0000; width: 100%; height: 100%"></component>  
     </keep-alive> 
     </div>  
   </div>

@@ -1,10 +1,10 @@
 <template>
-  <div class="loginPane" :v-if="this.FunctionStatus === 'login'">
+  <div class="loginPane" :v-if="this.FunctionStatus === 'register'">
      <el-form  class="login-container">
         <el-form-item class="login-list">
           <el-input type="text" 
           placeholder="请输入注册邮箱" 
-          v-model="userInfo.account" 
+          v-model="userInfo.email" 
           prefix-icon="el-icon-s-custom"
           auto-complete="off"></el-input>
         </el-form-item>
@@ -19,8 +19,8 @@
           prefix-icon="el-icon-lock"
           v-model="rePassword"
           auto-complete="off"></el-input>
-        </el-form-item >
-          <el-form-item class="login-list">
+        </el-form-item>
+          <!-- <el-form-item class="login-list">
             <el-input 
             class="verification"
             type="number"
@@ -35,9 +35,9 @@
                 <el-button class="verification-btn" :loading="true">{{ this.verifyRecords}}s</el-button>
             </template>
           </el-input>
-          </el-form-item >
+          </el-form-item > -->
         <el-form-item class="Modal-submitBtn">
-          <el-button type="primary" @click="submitLogin" style="width: 100%;">登录</el-button>
+          <el-button type="primary" @click="this.submitRegister" style="width: 100%;">注册</el-button>
         </el-form-item>
       </el-form>
   </div>
@@ -60,7 +60,9 @@ box-sizing: border-box;
 </style>
 
 <script> 
-import { Form , FormItem, Input} from 'element-ui'
+import { Register } from '@/api/login.js'
+import { Form , FormItem, Input, Message } from 'element-ui'
+
 export default {
 props: {
 registerModal: {
@@ -74,8 +76,8 @@ data() {
 return {
   userInfo:{
     password:'',
-    account:'',
-    verification:'',
+    email:'',
+    // verification:'',
   },
   isVerifying:false,
   verifyRecords:60,
@@ -92,7 +94,6 @@ return {
 methods:{
 requestForVerification(){
   this.isVerifying = true;
-  
     let count = setInterval(()=>{
      this.verifyRecords --;
       if( this.verifyRecords == 0){
@@ -107,8 +108,36 @@ requestForVerification(){
 submitLogin(){
 
 },
-submitRegister(){
-
+async submitRegister(){
+  function isEmail(str){ 
+      var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
+      return reg.test(str); 
+  }
+  console.log("1")
+  if(isEmail(this.userInfo.email)){
+    console.log("2")
+    if(this.userInfo.password === this.rePassword){
+        let res = await Register(this.userInfo);
+        if(!res) console.log(res);
+        Message({
+          message: '请及时前往邮箱进行注册验证!',
+          type: 'success'
+        });
+      }else{
+        Message({
+          showClose: true,
+          message: '两次密码输入不一致,请重新输入!',
+          type: 'error'
+        });
+      }
+  }else{
+    Message({
+          showClose: true,
+          message: '请输入合法电子邮箱账号!',
+          type: 'error'
+        });
+      }
+ 
 },
 switchTab(tab,e){
   console.log(tab, event);
@@ -116,7 +145,7 @@ switchTab(tab,e){
 }
 },
 components:{
-Form,FormItem,Input
+Form,FormItem,Input,Message
 },
 watch: {
 registerModal: {

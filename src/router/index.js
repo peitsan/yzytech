@@ -108,6 +108,38 @@ const routes = [
   }
   ,
   {
+    //订单中心
+    path: '/OrderCenter',
+    name: 'OrderCenter',
+    component: () => import('../views/OrderCenter.vue'),
+    children: [
+	    {
+      name:'Productions',
+			path: "/OrderCenter/:OrderMode",
+			component: () => import('../views/OrderCenter/Productions.vue')
+		},
+    {
+      name:'Service',
+			path: "/OrderCenter/:OrderMode",
+			component: () => import('../views/OrderCenter/Service.vue')
+		}
+	]
+  }
+  ,
+  {
+    //管理中心
+    path: '/AdminCenter',
+    name: 'AdminCenter',
+    component: () => import('../views/AdminCenter.vue'),
+    children: [
+	    {
+			path: "/AdminCenter/Consumption/index",
+			component: () => import('../views/AdminCenter/Consumption.vue')
+		}
+	  ]
+  }
+  ,
+  {
     // 路径错误时访问首页
     path: '*',
     component: Home

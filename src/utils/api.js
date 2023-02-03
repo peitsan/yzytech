@@ -4,9 +4,11 @@
  * 发布环境时 = 
  */
 
- const WEBPACK_CONFIG_HOST = "https://youzhiyan.cn/api/";
+//  const WEBPACK_CONFIG_HOST = "https://youzhiyan.com:8080";
+// const WEBPACK_CONFIG_HOST = 'https://139.9.81.3:8080'
+const WEBPACK_CONFIG_HOST = '/api'
 
 export default {
-    register: WEBPACK_CONFIG_HOST +'/sys/cquptsmqd/get_schedule.do',
+    register: WEBPACK_CONFIG_HOST +'/user/create',
     login: WEBPACK_CONFIG_HOST +'/sys/cquptsmqd/check_can_sign_in.do',
   }
