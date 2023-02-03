@@ -25,6 +25,7 @@ import {
          Dialog,
          Tabs,
          TabPane,
+        Radio,
         RadioButton,
         RadioGroup,
         Input,
@@ -45,6 +46,7 @@ import {
         Card,
         Upload,
         Message} from "element-ui";
+Vue.use(Radio);    
 Vue.use(Loading.directive);
 Vue.use(Message);
 Vue.use(Upload);

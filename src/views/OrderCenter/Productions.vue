@@ -44,12 +44,21 @@
         </el-col>
         </div>
     </div>
+      
+       <div id="shopping-aside">
+          <div class="aside-square">
+            <i class="el-icon-shopping-cart-full"></i>
+            购物车
+          </div>
+          <div class="aside-square" ><i class="el-icon-service"></i>
+            客服</div>
+      </div>
     </div>
   </template>
   
   <script>
   import { Row, Col, Card, Avatar, Button, Upload, Carousel, CarouselItem } from 'element-ui'
-
+  
   export default {
     metaInfo: {
       title:
@@ -73,13 +82,13 @@
         avatarSize:120,
         Commodity:[
           {
-          productionNameCn:"轻油/白电油", //商品服务名称
-          productionNameEn:"Light oil/White Electric oil", //商品服务名称
+          productionNameCn:"钻井原液", //商品服务名称
+          productionNameEn:"Drilling stock fluid", //商品服务名称
           productionSerialNumber:"30000001", //商品序列号
-          productionDescription:"国标优质白电油", //商品描述
-          unitPrice:12, //单价人民币
-          unitCn:"千克", //计价单位
-          unitEn:"Kg", //计价单位
+          productionDescription:"本产品的主要成分有清水、泥浆、无粘土相冲洗液、乳状液、泡沫和压缩空气等.其主要作用有：清洁井底，携带岩屑、冷却和润滑钻头及钻柱、降低岩屑沉降速度，避免沉沙卡钻等。", //商品描述
+          unitPrice:9000, //单价人民币
+          unitCn:"吨", //计价单位
+          unitEn:"Ton", //计价单位
           inventory:1000,          //库存
           salesVolumn:232,  //总销量
           samplePicture:[
@@ -97,18 +106,18 @@
               url:"https://resource.youzhiyan.cn/commodity/2023020301/30000001-4.png"
             }
           ],
-          batch:"2023020301",//批次
+          batch:"YZY-202302",//批次
         },{
           productionNameCn:"柴油", //商品服务名称
           productionNameEn:"Diesel oil", //商品服务名称
           productionSerialNumber:"30000002", //商品序列号
-          productionDescription:"国标优质#0柴油", //商品描述
-          unitPrice:224, //单价人民币
+          productionDescription:"本产品是含有一种或几种农作物生长需要的营养元素的肥料，成分单纯，养分含量高；肥效快，肥劲猛。不仅是增辟肥源的有效方法，对改良土壤也有很大作用。", //商品描述
+          unitPrice:7500, //单价人民币
           unitCn:"吨", //计价单位
           unitEn:"Ton", //计价单位
           inventory:1000,          //库存
           salesVolumn:222,  //总销量
-          batch:"2023020301",//批次
+          batch:"YZY-202302",//批次
           samplePicture:[
             {
               pictureAlt:"柴油发货包装",
@@ -128,13 +137,13 @@
           productionNameCn:"绿化肥料", //商品服务名称
           productionNameEn:"Green fertilizer", //商品服务名称
           productionSerialNumber:"20000001", //商品序列号
-          productionDescription:"国标优质绿化肥料", //商品描述
-          unitPrice:213, //单价人民币
+          productionDescription:"本产品是含有一种或几种农作物生长需要的营养元素的肥料，成分单纯，养分含量高；肥效快，肥劲猛。不仅是增辟肥源的有效方法，对改良土壤也有很大作用。", //商品描述
+          unitPrice:1500, //单价人民币
           unitCn:"吨", //计价单位
           unitEn:"Ton", //计价单位
           inventory:1000,          //库存
           salesVolumn:3223,  //总销量
-          batch:"2023020301",//批次
+          batch:"YZY-202302",//批次
           samplePicture:[
             {
               pictureAlt:"绿化肥料批量样图",
@@ -148,16 +157,16 @@
             }
           ]
         },{
-          productionNameCn:"路基免烧砖", //商品服务名称
+          productionNameCn:"免烧砖原材料", //商品服务名称
           productionNameEn:"Roadbed free brick", //商品服务名称
           productionSerialNumber:"40000001", //商品序列号
-          unitPrice:11.34, //单价人民币
-          unitCn:"200件", //计价单位
-          unitEn:"200 piece", //计价单位
+          unitPrice:65, //单价人民币
+          unitCn:"平方米", //计价单位
+          unitEn:"m^3", //计价单位
           inventory:1000,          //库存
-          salesVolumn:8600,  //总销量
-          batch:"2023020301",//批次
-          productionDescription:"标准建筑预置免烧砖", //商品描述
+          salesVolumn:860,  //总销量
+          batch:"YZY-202302",//批次
+          productionDescription:"本产品是由自然条件作用（主要是 岩石风化 ）而形成的，粒径在5mm以下的岩石颗粒，主要用于制浇铸模和免烧砖等产品。", //商品描述
           samplePicture:[
             {
               pictureAlt:"路基免烧砖",
@@ -272,7 +281,31 @@
             padding-left: 24px;
           }
     }
-  
+    #shopping-aside{
+        position:fixed;
+        top:40%;
+        right:20px;
+        display: flex;
+        flex-flow:column;
+        .aside-square{
+          width:100px;
+          height:100px;
+          text-align: center;
+          background-color: #fff;
+          border-style:solid;
+          border-width:1px;
+          border-color:#dadada;
+          font-size:18px;
+          font-weight:300;
+            color:#737272;
+          i{
+            width:80px;
+            height:80px;
+            font-size:64px;
+            color:#dadada;
+          }
+        }
+    }
     @media screen and (max-width: 1200px) {
       #UserInfo {
       .box-card .card-title{

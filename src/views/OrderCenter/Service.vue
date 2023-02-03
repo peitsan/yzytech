@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div id="Service">
           <el-row :row="16">
-            <el-col :span="8">
+            <el-col :span="7" style="margin:0 10px">
               <el-row :row="4" class="list-title">服务报价:</el-row>
               <el-card>
                 <el-row :row="4" class="list-subtitle-center">服务定价分级</el-row>
@@ -19,33 +19,44 @@
               </el-card>
              
             </el-col>
-            <el-col :span="16">
+            <el-col :span="7" style="margin:0 10px">
                 <el-row :row="2" class="list-title">贵司经营地址:</el-row>
                <el-row :row="6" style="height:300px">
                   <el-input class="addressInput" v-model="addressKeyword"  placeholder="请输入或者点击地图选择贵司经营所在地"></el-input>
-                      <baidu-map id="BaiduMap" :center="center" :zoom="zoom" @ready="handler" style="height:300px" @moveend="getInputAddress" @click="getClickInfo" :scroll-wheel-zoom='true' v-loading='loadingMap'>
+                      <baidu-map id="BaiduMap" :center="center" :zoom="zoom" @ready="handler"   @click="getClickInfo" :scroll-wheel-zoom='true' v-loading='loadingMap'>
                         <bm-view style="width: 100%; height:500px; flex: 1"></bm-view>
                         <bm-local-search :keyword="addressKeyword" :auto-viewport="true" style="display: none" @searchcomplete="this.onInputHandle"></bm-local-search>
                         <bm-geolocation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" :showAddressBar="true" :autoLocation="true" ></bm-geolocation>
                       </baidu-map>
                  </el-row>
-                <el-row :row="2" class="list-title">请选择选择油基岩屑处理标准:</el-row>
+            </el-col>
+            <el-col :span="7" style="margin:0 10px">
+              <el-row :row="2" class="list-title">贵司油基岩屑处理需求量:</el-row>
+              <el-input class="addressInput" v-model="requirement"  placeholder="请输入贵司油基岩屑处理需求量" type="number" > <template slot="append">(单位:吨/Ton)</template></el-input>
+              <el-row :row="2" class="list-title">请选择选择油基岩屑处理标准:</el-row>
                 <el-row :row="2" class="list-title">
                   <el-radio-group v-model="serviceType">
-                    <el-radio v-for="(service,index) in this.Services" :key="service.serviceSerialNumber" :label="index">{service.standard}</el-radio>
+                    <el-radio v-for="(service,index) in this.Services" :key="service.serviceSerialNumber" :label="index" >{{service.standard}}</el-radio>
                   </el-radio-group>
                 </el-row>
+
+                <el-row :row="2" class="list-tips">经我司处理后,贵司油基岩土壤残油率将会低于: <span>{{Services[serviceType].standard}} </span></el-row>
+                <el-row :row="2" class="list-subtips"><el-col :span="14">处理费用:  <span>{{ this.unitPrice*this.requirement }}</span> </el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
+                <el-row :row="2" class="list-subtips"><el-col :span="14">运输距离:  <span>{{ Math.round(100*this.distance/1000)/100 }} </span> </el-col>   <el-col :span="6">(公里/km)</el-col></el-row>
+                <el-row :row="2" class="list-subtips"><el-col :span="14">运输费用: <span>{{ Math.round(0.83*(this.distance/1000)*this.requirement*100)/100 }}</span> </el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
+                <el-row :row="2" class="list-subtips"><el-col :span="14">总计费用:  <span>{{ Math.round((this.unitPrice*this.requirement + 0.83*(this.distance/1000)*this.requirement )*100)/100 }}</span></el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
               <el-row :row="4" class="control-btn">
-                        <el-button type="primary" @click="saveAddress()">保 存</el-button>
+                       <button class="submit-btn">提交订单</button>
                </el-row>
-            </el-col>
+              </el-col>  
           </el-row>
+          
         </div>
     </div>
   </template>
   
   <script>
-  import { Row, Col, Card, Avatar, Button, Upload} from 'element-ui'
+import { Row, Col, Card,Button, Radio,RadioGroup} from 'element-ui'
   export default {
     metaInfo: {
       title:
@@ -66,9 +77,10 @@
     data() {
       return {
         imageUrl: '',
-        isChanging: false,
-        avatarSize:120,
-        location:'',
+        serviceType:0, //选中类型
+        unitPrice:1450, //单价
+        requirement:0, //处理需求
+        distance:0, //距离单位为m
         Services:[
         {
           serviceNameCn:"油基岩屑无害化处理服务(低于2‰残油率)", //商品服务名称
@@ -152,7 +164,6 @@
           pointLngLat: '',
           center: { lng: 109.45744048529967, lat: 36.49771311230842 },
           zoom: 13,
-          distance:'',
           homePoint:{lng:105.3700000000000,lat: 28.770000000000000 },
       };
     },
@@ -163,12 +174,19 @@
         this.avatarSize = 50;
       }
     },
+    watch:{
+    serviceType: {
+        handler(newVal, oldVal) {
+          this.unitPrice = this.Services[newVal].unitPrice;
+        },
+        immediate: true
+        },
+    },
     methods:{
-  getInputAddress(e){
-    console.log(e);
+  handleRadioSelect(val){
+    this.unitPrice = val.unitPrice;
   },
   handler ({BMap, map}) {
-    console.log("1")
  this.BMap = BMap
  this.map = map
  this.loadingMap = true
@@ -181,7 +199,6 @@
    myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), function (result) {
      if (result) {
        $this.loadingMap = false
-       console.log(result)
        $this.$set($this, 'pointLngLat', {lng: result.point.lng, lat: result.point.lat})
        map.enableScrollWheelZoom(true) // 开启鼠标滚轮缩放,默认关闭
        $this.addPoint({BMap, map})
@@ -221,10 +238,8 @@ onInputHandle(e){
       var point1 = new BMap.Point(this.center.lng,this.center.lat);  
       var point2 = new BMap.Point(this.homePoint.lng,this.homePoint.lat);  
      this.distance = map.getDistance(point1,point2);
-      console.log(this.distance);
       
   }
-  console.log(this.center);
 },
 },
     created() {
@@ -234,9 +249,9 @@ onInputHandle(e){
     Row,
     Col,
     Card,
-    Avatar,
     Button, 
-    Upload,
+    Radio,
+    RadioGroup
 }
   };
   </script>
@@ -296,6 +311,38 @@ onInputHandle(e){
             font-weight: 550;
           }
       }
+      .list-tips{
+         margin-left:12px;
+          margin-bottom:20px;
+          font-size:20px;
+          font-weight:550;
+          span{
+            font-size: 28px;
+            color:goldenrod;
+            font-weight: 550;
+          }
+      }
+
+      .list-subtips{
+          font-size:18px;
+          font-weight:480;
+         margin-left:12px;
+          margin-bottom:20px;
+          span{
+            font-size: 28px;
+            color:rgb(0, 185, 185);
+            font-weight: 550;
+          }
+      }
+      .control-btn .submit-btn{
+        margin:100px 10% 0 10%;
+        width:280px;
+        height:48px;
+        border-color:aquamarine;
+        background-color: aliceblue;
+        color:#131216;
+        border-radius: 24px;
+      }
     }
   }
     @media screen and (max-width: 1200px) {
@@ -304,8 +351,13 @@ onInputHandle(e){
       .list-title{
         font-size:24px;
         font-weight: 550;
+        .highLight{
+          color:gold;
+         }
+        }
       }
+      
     }
+   
   }
-}
 </style>
