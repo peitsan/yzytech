@@ -13,7 +13,7 @@
           </el-radio-group>
         </div>
     <keep-alive>   
-      <component v-bind:is="tabView, tabChange(FunctionStatus)" style="background: #FF0000; width: 100%; height: 100%"></component>  
+      <component  @hasLogin="confirmLogin" v-bind:is="tabView, tabChange(FunctionStatus)" style="background: #FF0000; width: 100%; height: 100%"></component>  
     </keep-alive> 
     </div>  
   </div>
@@ -167,6 +167,9 @@
       };
     },
     methods:{
+      confirmLogin(val){
+        this.$emit(hasLogin,val);
+      },
       // 切换登录注册按钮渲染
       tabChange(tab){
       console.log("tab："+tab)

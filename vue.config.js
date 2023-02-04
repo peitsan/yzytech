@@ -1,19 +1,21 @@
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 const path = require('path');
-const WEBPACK_CONFIG_HOST = 'https://139.9.81.3:8088'
+const WEBPACK_CONFIG_HOST = 'http://139.9.81.3:8088'
 // const WEBPACK_CONFIG_HOST = '139.9.81.3:8088'
 module.exports = {
     assetsDir: "static", //静态资源打包到static文件夹
     productionSourceMap: false,
     lintOnSave: false,
     devServer: {
+        host:'127.0.0.1',
+        port:8081,
         disableHostCheck: true, 
-        port: 3000, //修改项目端口用的
         proxy: { //代理
             '/api': { //遇到这个开头的，就是拼上下面的target，我是这样理解的
                 target: WEBPACK_CONFIG_HOST,
                 ws: true,
+                secure:false,
                 changeOrigin: true,
                 pathRewrite:{
                     '^/api': ''//重写路径

@@ -36,10 +36,10 @@
             <router-link to="/">首页</router-link>
           </li>
           <li>
-            <router-link to="/brand">品牌</router-link>
+            <router-link to="/brand">品牌文化</router-link>
           </li>
           <li>
-            <router-link to="/about">油之岩愿景</router-link>
+            <router-link to="/about">社会价值</router-link>
           </li>
           <li>
             <router-link to="/kit">产品服务</router-link>
@@ -148,6 +148,7 @@
     :registerModal="this.registerModalStatus" 
     :loginModal="this.loginModalStatus"
     @ModalStatus="modalCloseHandle"
+    @hasLogin="confirmLogin"
                 />
    </div>
 </template>
@@ -169,7 +170,7 @@ export default {
             userInfo:{
               Avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
             },
-            isLogin: true,
+            isLogin: false,
             contactWay: {
                 // 网站顶部邮箱
                 email: "cqyzytech@163.com",
@@ -189,6 +190,10 @@ export default {
       },
       routerToVerification(){
         this.$router.push('/UserCenter/Enterprise/index')
+      },
+      confirmLogin(){
+        this.isLogin = true;
+        // 登录成功回调
       },
         // 注销登录
         loginOut(){

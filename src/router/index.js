@@ -104,6 +104,10 @@ const routes = [
 			path: "/UserCenter/Enterprise/index",
 			component: () => import('../views/UserCenter/Verification.vue')
 		},
+    {
+			path: "/UserCenter/Activation",
+			component: () => import('../views/UserCenter/Activation.vue')
+		},
 	]
   }
   ,

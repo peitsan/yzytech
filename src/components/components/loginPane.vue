@@ -4,7 +4,7 @@
               <el-form-item class="login-list">
                 <el-input type="text" 
                 placeholder="账号" 
-                v-model="userInfo.account" 
+                v-model="userInfo.email" 
                 prefix-icon="el-icon-s-custom"
                 auto-complete="off"></el-input>
               </el-form-item>
@@ -52,7 +52,7 @@
 </style>
 
 <script> 
-  import { Login } from '@/api/login'
+  import { Login } from '@/api/api'
   import { Form , FormItem, Input ,Message} from 'element-ui'
   export default {
     props: {
@@ -83,30 +83,49 @@
     },
     methods:{
       async submitLogin(){
+        console.log(this.userInfo.email);
         function isEmail(str){ 
           var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
           return reg.test(str); 
           }
       if(isEmail(this.userInfo.email)){
         let res = await Login(this.userInfo);
-        if(!res) {console.log(res);
+        console.log(res);
+       if(res.status == 200){
+        if(res.data.code == 200){
         Message({
-          message: '登录成功!',
+          message: res.data.message,
           type: 'success'
         });
+        this.$emit(hasLogin,true)
+        }
+        else if(res.data.code == 400){
+        Message({
+          message: res.data.message,
+          type: 'danger'
+        });
+        this.$emit(hasLogin,true)
         }
         else{
               tryTimes++;
               this.$message({
                 message: '登录失败!',
-                type: 'error'
+                type: 'danger'
                });
             }
-        }else{
+       }
+       else{
+        Message({
+          message: '网络匆忙,请稍后重试!',
+          type: 'warning'
+        });
+       }
+          
+    }else{
           Message({
                 showClose: true,
                 message: '请输入合法电子邮箱账号!',
-                type: 'error'
+                type: 'danger'
               });
             }
       },

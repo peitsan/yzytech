@@ -60,7 +60,7 @@ box-sizing: border-box;
 </style>
 
 <script> 
-import { Register } from '@/api/login.js'
+import { Register } from '@/api/api.js'
 import { Form , FormItem, Input, Message } from 'element-ui'
 
 export default {
@@ -111,27 +111,39 @@ async submitRegister(){
       var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
       return reg.test(str); 
   }
-  console.log("1")
   if(isEmail(this.userInfo.email)){
     if(this.userInfo.password === this.rePassword){
         let res = await Register(this.userInfo);
-        if(!res) console.log(res);
+        if(res.status == 200){
+          if(res.data.code == 200) 
         Message({
-          message: '请及时前往邮箱进行注册验证!',
+          message: res.data.message,
           type: 'success'
+        })
+        else{
+          Message({
+          message: '注册失败,请检查后重试!',
+          type: 'danger'
+        })
+        }
+        }else{
+          Message({
+          message: '网络匆忙,请稍后重试!',
+          type: 'warning'
         });
+        }
       }else{
         Message({
           showClose: true,
           message: '两次密码输入不一致,请重新输入!',
-          type: 'error'
+          type: 'danger'
         });
       }
   }else{
     Message({
           showClose: true,
           message: '请输入合法电子邮箱账号!',
-          type: 'error'
+          type: 'danger'
         });
       }
  
