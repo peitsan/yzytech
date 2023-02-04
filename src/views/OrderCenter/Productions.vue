@@ -51,7 +51,7 @@
     </div>
       
        <div id="shopping-aside">
-          <div class="aside-square">
+          <div class="aside-square" @click="openPurchaseCarModal">
             <i class="el-icon-shopping-cart-full"></i>
             购物车
           </div>
@@ -64,7 +64,6 @@
       :visible.sync="showPurchaseModal"
       >
         <el-row>
-
           <el-col :span="8">
           <el-carousel height="250px" v-if="this.selectProduction">
               <el-carousel-item v-for="item in this.selectProduction.samplePicture" :key="item.url">
@@ -114,13 +113,109 @@
               </el-row>
           </el-col>
         </el-row>
-
       </el-dialog>~
+    
+      <el-dialog
+      width="1000px"
+      title="购物车"
+      :visible.sync="showPurchaseCar"
+      > 
+      <el-table
+         :key="keyOfTable"
+        :data="shopCarList.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+        :stripe="stripe"
+        :current-page.sync="currentPage"
+        style="width: 100%;height: 300px;">
+        <el-table-column
+            type="index"
+            label="序号"
+            :index="indexMethod"
+            width="50">
+         </el-table-column>
+         <el-table-column
+            prop="productionSerialNumber"
+            label="产品编号"
+            width="120">  
+         </el-table-column>
+         <el-table-column
+            prop="samplePicture"
+            label="产品样图"
+            width="90">
+            <template slot-scope="scope">
+              <img :src="scope.row.samplePicture[0].url" style="width:50px;height:50px">
+            </template>
+         </el-table-column>
+         <el-table-column
+            prop="productionNameCn"
+            label="产品名称"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            prop="unitPrice"
+            label="单价"
+            width="80">
+         </el-table-column>
+         <el-table-column
+            prop="unitCn"
+            label="计价单位"
+            width="80">
+         </el-table-column>
+         <el-table-column
+            prop="amount"
+            label="订购数量"
+            width="180">
+               <!-- <template slot-scope="scope">
+                  <el-input v-model="scope.row.amount" style="width: 180px;" placeholder="请输入购买商品数量">
+                        <template slot="append">{{ scope.row.unitCn}}
+                </template>
+              </el-input>
+              </template> -->
+              <template slot-scope="scope">
+                  <input style="width: 120px; height:50px;font-size:18px; line-height: 18px;" @input="handelInputAmount(shopCarList,scope.$index,scope.row)"  type="number" 
+ 			             v-model="scope.row.amount">
+                  </template>
+               <!--   </el-input>
+               <input style="width: 120px; height:50px;font-size:18px; line-height: 18px;" type="number" v-model="tmpAmount" @change="e=>handelInputAmount(e,scope)" placeholder="请输入数量"/> 
+               <el-input v-model="shopCarList[scope.$index].amount" style="width: 120px; height:50px;font-size:18px; line-height: 18px;" type="number"  @change="handelInputAmount($event,scope)" placeholder="请输入数量"/>  
+              </template> -->
+         </el-table-column>
+         <el-table-column
+            prop="transactionAmount"
+            label="合算"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            label="操作"
+            width="90">
+           <template slot-scope="scope">
+            <el-popconfirm
+                title="确认移出购物车吗？"
+                @confirm="removeFromShopCar(scope.$index)"
+                >
+              <el-button slot="reference" type='danger' plain icon="el-icon-remove-outline" circle></el-button>
+            </el-popconfirm>
+           </template>
+         </el-table-column>
+      </el-table>
+      <div class="pagination">
+          <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :page-sizes="[10, 15, 20]"
+              :page-size="pagesize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total">
+      </el-pagination>
+        </div>
+        <div style="position:relative; left:90%">
+          <el-button type="primary" dark>下单</el-button>
+        </div>
+      </el-dialog>
     </div>
   </template>
   
   <script>
-  import { Row, Col, Card, Avatar, Button, Upload, Carousel, CarouselItem, Popconfirm, Dialog} from 'element-ui'
+  import { Row, Col, Card, Avatar, Button, Upload, Carousel, CarouselItem, Popconfirm, Dialog,Table, TableColumn,Tag,Pagination} from 'element-ui'
   
   export default {
     metaInfo: {
@@ -140,6 +235,13 @@
     },
     data() {
       return {
+        keyOfTable:0,
+        stripe:true,//是否为斑马纹 table
+        currentPage:1,
+        tmpAmount:0,
+        pagesize:10,
+        total:0,
+        showPurchaseCar:false,
         showPurchaseModal:false,
         shopCarList:[],
         selectProduction:{},
@@ -289,13 +391,44 @@
       };
     },
     methods:{
+      indexMethod(index) {
+          return (
+            // 索引分页自增累加，   (当前页-1)*每页显示的条数+table索引+1
+            (this.currentPage - 1) * this.pagesize + index + 1
+          );
+        },
+      handleSizeChange(val) {
+            this.pagesize=val;
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val;
+        },
+        handelInputAmount(data, index, row){
+          row.editable = true;
+		      this.keyOfTable++;
+          row.transactionAmount = row.amount * row.unitPrice;
+          console.log(data, index, row);
+          this.$set( this.shopCarList, index, row);
+          this.isUpdate = !this.isUpdate;
+          console.log(this.shopCarList);
+          // this.shopCarList[scope.$index].amount = val.detail.value;
+          // this.shopCarList[scope.$index].transactionAmount = ;
+        },
       openPurchaseModal(goods){
         this.showPurchaseModal = true;
         this.selectProduction = goods;
       },
+      openPurchaseCarModal(){
+        this.showPurchaseCar = true;
+      },
+      removeFromShopCar(index){
+        this.shopCarList.splice(index,1)
+      },
       addCommodityToShopCar(goods){
+        goods['amount'] = 0;
+        goods['transactionAmount'] = 0;
         this.shopCarList.push(goods);
-        console.log(this.shopCarList);
+        // console.log(this.shopCarList);
       }
     },
     created() {
@@ -311,7 +444,9 @@
     Carousel,
     CarouselItem,
     Popconfirm,
-    Dialog
+    Dialog,
+    Table, TableColumn,Tag,
+    Pagination
 }
   };
   </script>
