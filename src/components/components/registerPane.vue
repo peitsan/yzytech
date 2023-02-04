@@ -105,9 +105,7 @@ requestForVerification(){
     this.verifyRecords = 60;
   },60000);
 },
-submitLogin(){
 
-},
 async submitRegister(){
   function isEmail(str){ 
       var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
@@ -115,7 +113,6 @@ async submitRegister(){
   }
   console.log("1")
   if(isEmail(this.userInfo.email)){
-    console.log("2")
     if(this.userInfo.password === this.rePassword){
         let res = await Register(this.userInfo);
         if(!res) console.log(res);

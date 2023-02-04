@@ -16,6 +16,6 @@ server.use(jsonServer.rewriter({
 }))
 
 server.use(jsonServer.router(db))
-server.listen(3000, () => {
+server.listen(4000, () => {
     console.log('JSON Server is running')
 })

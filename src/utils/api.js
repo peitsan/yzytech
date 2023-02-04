@@ -5,10 +5,11 @@
  */
 
 //  const WEBPACK_CONFIG_HOST = "https://youzhiyan.com:8080";
-// const WEBPACK_CONFIG_HOST = 'https://139.9.81.3:8080'
+// const WEBPACK_CONFIG_HOST = 'https://139.9.81.3:8088'
+// const WEBPACK_CONFIG_HOST = 'https://localhost:8088'
 const WEBPACK_CONFIG_HOST = '/api'
 
 export default {
     register: WEBPACK_CONFIG_HOST +'/user/create',
-    login: WEBPACK_CONFIG_HOST +'/sys/cquptsmqd/check_can_sign_in.do',
+    login: WEBPACK_CONFIG_HOST +'/user/login',
   }

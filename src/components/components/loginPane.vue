@@ -67,7 +67,7 @@
       return {
         userInfo:{
           password:'',
-          account:''
+          email:''
         },
         rePassword:'',
         loginTimesUpover:false,
@@ -83,22 +83,32 @@
     },
     methods:{
       async submitLogin(){
-        await Login().then(
-          res=>{
-            if(res.code == 200){
-              this.$message({
-                message: '登录成功!',
-                type: 'success'
-               });
-            }
-            else{
+        function isEmail(str){ 
+          var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
+          return reg.test(str); 
+          }
+      if(isEmail(this.userInfo.email)){
+        let res = await Login(this.userInfo);
+        if(!res) {console.log(res);
+        Message({
+          message: '登录成功!',
+          type: 'success'
+        });
+        }
+        else{
               tryTimes++;
               this.$message({
                 message: '登录失败!',
                 type: 'error'
                });
             }
-          })
+        }else{
+          Message({
+                showClose: true,
+                message: '请输入合法电子邮箱账号!',
+                type: 'error'
+              });
+            }
       },
       submitRegister(){
 
