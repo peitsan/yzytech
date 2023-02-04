@@ -32,6 +32,7 @@
             </el-col>
             <el-col :span="7" style="margin:0 10px">
               <el-row :row="2" class="list-title">贵司油基岩屑处理需求量:</el-row>
+              <el-card>
               <el-input class="addressInput" v-model="requirement"  placeholder="请输入贵司油基岩屑处理需求量" type="number" > <template slot="append">(单位:吨/Ton)</template></el-input>
               <el-row :row="2" class="list-title">请选择选择油基岩屑处理标准:</el-row>
                 <el-row :row="2" class="list-title">
@@ -48,6 +49,7 @@
               <el-row :row="4" class="control-btn">
                        <button class="submit-btn">提交订单</button>
                </el-row>
+              </el-card>
               </el-col>  
           </el-row>
           
@@ -167,13 +169,6 @@ import { Row, Col, Card,Button, Radio,RadioGroup} from 'element-ui'
           homePoint:{lng:105.3700000000000,lat: 28.770000000000000 },
       };
     },
-    mounted(){
-      const res = window.matchMedia("(max-width: 1200px)").matches;
-      console.log(res);
-      if(res){
-        this.avatarSize = 50;
-      }
-    },
     watch:{
     serviceType: {
         handler(newVal, oldVal) {
@@ -234,7 +229,8 @@ onInputHandle(e){
     if(e.Yr.length>0)
      this.center.lng = e.Yr[0].point.lng;
      this.center.lat = e.Yr[0].point.lat;
-      var map = new BMap.Map("BaiduMap");  
+      // var map = new BMap.Map("BaiduMap")
+      var map = new BMap.Map();  
       var point1 = new BMap.Point(this.center.lng,this.center.lat);  
       var point2 = new BMap.Point(this.homePoint.lng,this.homePoint.lat);  
      this.distance = map.getDistance(point1,point2);
@@ -335,7 +331,7 @@ onInputHandle(e){
           }
       }
       .control-btn .submit-btn{
-        margin:100px 10% 0 10%;
+        margin:70px 10% 0 10%;
         width:280px;
         height:48px;
         border-color:aquamarine;

@@ -10,11 +10,11 @@
               </el-carousel-item>
             </el-carousel>
             <div style="border-bottom: solid;border-color: #fafaf0; bordedr-width:2px;height:10px;margin-bottom: 8px;"></div>
-             <el-row :row="2" class="list-contain">
+            <el-row :row="2" class="list-contain">
               <el-col :span="8" class="list-title" >
                 产品名称：
               </el-col>
-              <el-col  :span="16" >
+              <el-col :span="16" >
                 {{commodity.productionNameCn}}
               </el-col>
             </el-row>
@@ -34,10 +34,15 @@
                 <el-button type='danger' plain icon="el-icon-service" circle></el-button>
               </el-col>
               <el-col :span="6">
-                <el-button type='danger' plain icon="el-icon-goods" circle></el-button>
+                <el-button type='danger' plain icon="el-icon-goods" circle  @click="openPurchaseModal(commodity)"></el-button>
               </el-col>
               <el-col :span="6">
-                <el-button type='danger' plain icon="el-icon-plus" circle></el-button>
+                <el-popconfirm
+                title="确认添加到购物车吗？"
+                @confirm="addCommodityToShopCar(commodity)"
+                >
+              <el-button slot="reference" type='danger' plain icon="el-icon-shopping-cart-1" circle></el-button>
+            </el-popconfirm>
               </el-col>
               </el-row>
             </el-card>
@@ -53,11 +58,69 @@
           <div class="aside-square" ><i class="el-icon-service"></i>
             客服</div>
       </div>
+
+      <el-dialog
+      title="订购产品"
+      :visible.sync="showPurchaseModal"
+      >
+        <el-row>
+
+          <el-col :span="8">
+          <el-carousel height="250px" v-if="this.selectProduction">
+              <el-carousel-item v-for="item in this.selectProduction.samplePicture" :key="item.url">
+                <img :src="item.url" :alt="item.pictureAlt">
+              </el-carousel-item>
+            </el-carousel>
+          </el-col>
+          <el-col :span="16">
+              <el-row :row="4"> 
+                  <el-col :span="6"  class="dialist-title">产品名称:    </el-col>
+                  <el-col :span="18" class="dialist-text">{{ this.selectProduction.productionNameCn }}</el-col>
+                </el-row>
+              <el-row :row="4" >
+                  <el-col :span="6" class="dialist-title">产品说明:    </el-col>
+                  <el-col :span="18" class="dialist-text">{{ this.selectProduction.productionDescription }}</el-col>
+              </el-row>
+              <el-row :row="4" >
+                  <el-col :span="6" class="dialist-title">产品单价:    </el-col>
+                  <el-col :span="18" class="dialist-text">{{ this.selectProduction.unitPrice +"￥/" + this.selectProduction.unitCn}}</el-col>
+              </el-row>
+
+              <el-row :row="4" >
+                  <el-col :span="6" class="dialist-title">库存:    </el-col>
+                  <el-col :span="18" class="dialist-text">{{ this.selectProduction.inventory}}</el-col>
+              </el-row>
+              <el-row :row="4" >
+                  <el-col :span="6" class="dialist-title">销量:    </el-col>
+                  <el-col :span="18" class="dialist-text">{{ this.selectProduction.salesVolumn}}</el-col>
+              </el-row>
+
+              <el-row :row="4" >
+                  <el-col :span="6" class="dialist-title">数量:    </el-col>
+                  <el-col :span="18" >
+                    <el-input style="width: 300px;" type="number" v-model="order.amount" placeholder="请输入购买商品数量">
+                      <template slot="append">(单位:{{ this.selectProduction.unitCn +'/'+ this.selectProduction.unitEn }})
+                      </template>
+                    </el-input>
+                  </el-col> 
+              </el-row>
+              <el-row :row="4" >
+                  <el-col :span="6" class="dialist-title">总价:    </el-col>
+                  <el-col :span="10" class="dialist-text">{{ this.selectProduction.unitPrice * this.order.amount}}</el-col>
+                  <el-col :span="8" class="dialist-text">人名币/￥</el-col>
+              </el-row>
+              <el-row :row="4" >
+                  <el-button type="primary" size="middle" style="float:right">订购</el-button>
+              </el-row>
+          </el-col>
+        </el-row>
+
+      </el-dialog>~
     </div>
   </template>
   
   <script>
-  import { Row, Col, Card, Avatar, Button, Upload, Carousel, CarouselItem } from 'element-ui'
+  import { Row, Col, Card, Avatar, Button, Upload, Carousel, CarouselItem, Popconfirm, Dialog} from 'element-ui'
   
   export default {
     metaInfo: {
@@ -77,9 +140,19 @@
     },
     data() {
       return {
-        imageUrl: '',
-        isChanging: false,
+        showPurchaseModal:false,
+        shopCarList:[],
+        selectProduction:{},
         avatarSize:120,
+        order:{
+          productionSerialNumber:'',
+          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+          contactsPerson:'',
+          contactsAddress:'',
+          customCompany:'',
+          amount:0,
+          transactionAmount:'',
+        },
         Commodity:[
           {
           productionNameCn:"钻井原液", //商品服务名称
@@ -215,36 +288,14 @@
           }
       };
     },
-    mounted(){
-      const res = window.matchMedia("(max-width: 1200px)").matches;
-      console.log(res);
-      if(res){
-        this.avatarSize = 50;
-      }
-    },
     methods:{
-      // 控制图像上传
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
+      openPurchaseModal(goods){
+        this.showPurchaseModal = true;
+        this.selectProduction = goods;
       },
-      // 图像上传前校验文件类型与文件大小
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
-      },
-      changingHandle(){
-        this.isChanging = true;
-      },
-      saveHandle(){
-        this.isChanging = false;  
+      addCommodityToShopCar(goods){
+        this.shopCarList.push(goods);
+        console.log(this.shopCarList);
       }
     },
     created() {
@@ -258,7 +309,9 @@
     Button,
     Upload,
     Carousel,
-    CarouselItem
+    CarouselItem,
+    Popconfirm,
+    Dialog
 }
   };
   </script>
@@ -277,9 +330,22 @@
           font-size: 16px;
          font-weight: 550;
         }
+     
         .commodity-list .operation{
             padding-left: 24px;
           }
+    }
+    .dialist-title{
+      margin-top:5px;
+      padding-left:50px;
+      font-size:20px;
+      font-weight: 550;
+    }
+    .dialist-text{
+      margin-top:5px;
+      font-size:16px;
+      line-height: 20px;
+      font-weight: 450;
     }
     #shopping-aside{
         position:fixed;

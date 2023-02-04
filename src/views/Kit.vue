@@ -53,7 +53,7 @@ export default {
           list: [
             {
               title: "订单管理",
-              href: "/AdminCenter/Consumption/index"
+              href: "/AdminCenter/Consumption"
              }
           ]
         },

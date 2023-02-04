@@ -185,7 +185,7 @@ export default {
         this.$router.push('/UserCenter/User/index')
       },
       routerToOrderCenter(){
-        this.$router.push('/OrderCenter')
+        this.$router.push('/OrderCenter/Productions')
       },
       routerToVerification(){
         this.$router.push('/UserCenter/Enterprise/index')

@@ -133,7 +133,7 @@ const routes = [
     component: () => import('../views/AdminCenter.vue'),
     children: [
 	    {
-			path: "/AdminCenter/Consumption/index",
+			path: "/AdminCenter/:OrderMode",
 			component: () => import('../views/AdminCenter/Consumption.vue')
 		}
 	  ]

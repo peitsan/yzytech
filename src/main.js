@@ -45,7 +45,13 @@ import {
         Main,
         Card,
         Upload,
-        Message} from "element-ui";
+        Message,
+        Table, 
+        TableColumn,
+        Tag} from "element-ui";
+Vue.use(Tag);     
+Vue.use(Table);
+Vue.use(TableColumn);
 Vue.use(Radio);    
 Vue.use(Loading.directive);
 Vue.use(Message);

@@ -1,74 +1,96 @@
 <template>
     <div class="wrapper">
-        <div id="UserInfo">
-          <el-card class="box-card">
-                  <div class="card-title">
-                    个人信息
-                    </div>
-                   <div class="tip-title">
-                    *油之岩科技重视保护用户个人信息隐私安全,承诺将信息用于更好地服务客户,坚决反对不法使用。
-                    </div>
-              </el-card>
-          <el-card class="box-card">
-           <el-col :span="4" class="avatarColumn">
-            <el-avatar v-if="!this.isChanging" :size="this.avatarSize" :src="this.userInfo.avatar">
-            </el-avatar>
-            <el-upload v-if="this.isChanging"
-              class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload">
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-col>
-          <el-col :span="2"  >
-          </el-col>
-          <el-col :span="16"  class="infoColumn">
-              <el-row :row="4">
-                <div class="infoTitle">   用户名: </div>
-                <div class="infoContent" v-if="!this.isChanging">   {{ this.userInfo.userName }} </div>
-                  <el-input class="infoInput" v-model="tmpInfo.userName" v-if="this.isChanging"></el-input>
-                <div class="infoTitle">   邮箱: </div>
-                <div class="infoContent">   {{ this.userInfo.mail }} </div>
-                  
-                <div class="infoTitle">   联系电话: </div>
-                <div class="infoContent">   {{ this.userInfo.tel }} </div>
-
-                <div class="infoTitle">   企业信息: </div>
-                <div class="infoTitle">   
-                  <!-- 左分列 -->
-                  <el-col :span="12">
-                    <div class="infoSubTitle">   企业名称: </div>
-                     <div class="infoContent" >   {{ this.userInfo.enterpiseName }} </div>
-                     <div class="infoSubTitle">   企业类型: </div>
-                    <div class="infoContent" v-if="!this.isChanging">   {{ this.userInfo.enterpiseType }} </div>
-                    <el-input v-model="tmpInfo.enterpiseType" class="infoInput" v-if="this.isChanging"></el-input>
-                  </el-col >
-                  <!-- 右分列 -->
-                  <el-col :span="12">
-                    <div class="infoSubTitle">   所属部门: </div>
-                     <div class="infoContent" v-if="!this.isChanging">   {{ this.userInfo.department }} </div>
-                     <el-input v-model="tmpInfo.department" class="infoInput" v-if="this.isChanging"></el-input>
-                     <div class="infoSubTitle">   工作/岗位: </div>
-                    <div class="infoContent" v-if="!this.isChanging">   {{ this.userInfo.jobs }} </div>
-                    <el-input v-model="tmpInfo.jobs" class="infoInput" v-if="this.isChanging"></el-input>
-                  </el-col> </div>
-                 
-              </el-row>
-              <el-row :row="2" class="infoOperation">
-                <el-col v-if="!this.isChanging" :span="12"><el-button class="infoBtn" type="warning" @click="changingHandle" >修改</el-button></el-col>
-                <el-col v-if="this.isChanging" :span="1"><el-button class="infoBtn" type="success" @click="saveHandle">保存</el-button></el-col>
-              </el-row>
-          </el-col>
-          </el-card>
-        </div>
+        <div id="AdminCenter">
+            <!-- 筛选状态 -->
+          <el-tabs v-model="tabView">
+            <el-tab-pane v-for="(tab,tabIndex) in this.tabList" :key="'tabList-'+tabIndex" :label="tab.label+'('+countDataSets(tab.name)+')'" :name="tab.name">
+            </el-tab-pane>
+          </el-tabs>
+          <!-- 表格组件 -->
+        <el-table
+        :data="tmpData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+        :stripe="stripe"
+        :current-page.sync="currentPage"
+        style="width: 100%;height: 400px;">
+        <el-table-column
+            type="index"
+            label="序号"
+            :index="indexMethod"
+            width="90">
+         </el-table-column>
+         <el-table-column
+            prop="orderStatus"
+            label="状态"
+            width="120"
+            >
+              <template slot-scope="scope"> 
+                <el-tag 
+                :effect="tranTagTheme(scope.row.orderStatus)"
+                :type="tranTagStyle(scope.row.orderStatus)">
+              {{ tranTag(scope.row.orderStatus) }}
+            </el-tag></template>
+         </el-table-column>
+         <el-table-column
+            prop="orderSerialNumber"
+            label="订单号"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            prop="orderStartTime"
+            label="下单时间"
+            width="180">
+            <template slot-scope="scope"> 
+               {{ tranDateStamp(scope.row.orderStartTime) }}
+            </template>
+         </el-table-column>
+         <el-table-column
+            prop="contactsPerson"
+            label="联系人"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            prop="contactsAddress"
+            label="联系地址"
+            width="180">
+         </el-table-column>
+         <el-table-column
+            prop="transactionAmount"
+            label="成交价"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            prop="shipmentAmount"
+            label="发货额"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            prop="shipmentAmount"
+            label="未收款"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            prop="grossProfitRate"
+            label="毛利率"
+            width="120">
+            <template slot-scope="scope">{{ (scope.row.grossProfitRate *100) + '%' }}</template>
+         </el-table-column>
+      </el-table>
+      <div class="pagination">
+          <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :page-sizes="[10, 15, 20]"
+              :page-size="pagesize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total">
+      </el-pagination>
     </div>
+    </div>
+  </div>
   </template>
   
   <script>
-  import { Row, Col, Card, Avatar, Button, Upload} from 'element-ui'
+import { Row, Col, Card, Button,Table, TableColumn, Pagination,Tag} from 'element-ui'
   export default {
     metaInfo: {
       title:
@@ -87,20 +109,111 @@
     },
     data() {
       return {
-        imageUrl: '',
-        isChanging: false,
-        avatarSize:120,
-        userInfo:{
-          avatar:"https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-          userName:"临裴惨",
-          tel:"+86 18025597877",
-          mail:"linpeican@lanshan.email",
-          userType:"1", //用户类型, 0为普通用户,1为企业认证用户, 2为公司员工,3为公司超级管理员
-          enterpiseName:"信息化办蓝山工作室",//企业名称
-          department:"前端研发部", //所属公司部门
-          enterpiseType:"计算机/互联网/网络技术", //行业分类
-          jobs:"前端", //工作/岗位
+        counts:0,
+        stripe:true,//是否为斑马纹 table
+        currentPage:1,
+        pagesize:10,
+        total:0,
+        tableRowClassName:'',
+        tabView:'',
+        tabList:[
+        {
+          label:"全部",
+          name:"All",
         },
+          {
+          label:"新订单",
+          name:"NewOrder",
+        },{
+          label:"进行中",
+          name:"Processing",
+        },{
+          label:"异常",
+          name:"Abnormity",
+        },{
+          label:"己取消",
+          name:"Cancel",
+        },{
+          label:"己完成",
+          name:"Over",
+        },{
+          label:"待报价",
+          name:"Quoting",
+        },{
+          label:"待审核",
+          name:"Auditing",
+        }
+      ],
+        dataSet:[{
+          orderStatus:0, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+          contactsPerson:"刘启", //联系人
+          contactsAddress:"成都锦江", //联系地址
+          customCompany:"圣都装饰", //客户单位
+          transactionAmount:351, //成交价
+          shipmentAmount:101,  //发货额
+          unreceivedAmount:351, //未收款
+          grossProfitRate:-5.718, //毛利率
+        },{
+          orderStatus:1, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成  5为状态异常 -1为已取消
+          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+          contactsPerson:"刘启", //联系人
+          contactsAddress:"成都锦江", //联系地址
+          customCompany:"圣都装饰", //客户单位
+          transactionAmount:351, //成交价
+          shipmentAmount:101,  //发货额
+          unreceivedAmount:351, //未收款
+          grossProfitRate:-5.718, //毛利率
+        },{
+          orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+          contactsPerson:"刘启", //联系人
+          contactsAddress:"成都锦江", //联系地址
+          customCompany:"圣都装饰", //客户单位
+          transactionAmount:351, //成交价
+          shipmentAmount:101,  //发货额
+          unreceivedAmount:351, //未收款
+          grossProfitRate:-5.718, //毛利率
+        },{
+          orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+          contactsPerson:"刘启", //联系人
+          contactsAddress:"成都锦江", //联系地址
+          customCompany:"圣都装饰", //客户单位
+          transactionAmount:351, //成交价
+          shipmentAmount:101,  //发货额
+          unreceivedAmount:351, //未收款
+          grossProfitRate:-5.718, //毛利率
+        },{
+          orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+          contactsPerson:"刘启", //联系人
+          contactsAddress:"成都锦江", //联系地址
+          customCompany:"圣都装饰", //客户单位
+          transactionAmount:351, //成交价
+          shipmentAmount:101,  //发货额
+          unreceivedAmount:351, //未收款
+          grossProfitRate:-5.718, //毛利率
+        },{
+          orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+          contactsPerson:"刘启", //联系人
+          contactsAddress:"成都锦江", //联系地址
+          customCompany:"圣都装饰", //客户单位
+          transactionAmount:351, //成交价
+          shipmentAmount:101,  //发货额
+          unreceivedAmount:351, //未收款
+          grossProfitRate:-5.718, //毛利率
+        }
+      
+      ],
+        tmpData:[],
         tmpInfo:{
           avatar:"https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
           userName:"临裴惨",
@@ -112,157 +225,158 @@
           enterpiseType:"计算机/互联网/网络技术", //行业分类
           jobs:"前端", //工作/岗位
           address:"",//公司地址
+          },
+          count:{
+          NewOrder: 0,
+          Processing: 0,
+          Abnormity: 0,
+          Cancel: 0,
+          Over: 0,
+          Quoting: 0,
+          Auditing:0,
+          },
+          category:{
+          NewOrder: [],
+          Processing: [],
+          Abnormity: [],
+          Cancel: [],
+          Over: [],
+          Quoting: [],
+          Auditing:[],
           }
       };
     },
-    mounted(){
-      const res = window.matchMedia("(max-width: 1200px)").matches;
-      console.log(res);
-      if(res){
-        this.avatarSize = 50;
-      }
+    watch:{
+      tabView:{
+      handler(newVal, oldVal) {
+        switch(newVal){
+            case 'All': return this.tmpData = this.dataSet;
+            case 'NewOrder': return this.tmpData = this.category.NewOrder;
+            case 'Processing': return this.tmpData = this.category.Processing;
+            case 'Abnormity': return this.tmpData = this.category.Abnormity;
+            case 'Cancel': return this.tmpData = this.category.Cancel;
+            case 'Over': return this.tmpData = this.category.Over;
+            case 'Quoting': return this.tmpData = this.category.Quoting;
+            case 'Auditing': return this.tmpData = this.category.Auditing;
+          }
+      },
+      immediate: true
+    },
     },
     methods:{
-      // 控制图像上传
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      // 图像上传前校验文件类型与文件大小
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
+      indexMethod(index) {
+          return (
+            // 索引分页自增累加，   (当前页-1)*每页显示的条数+table索引+1
+            (this.currentPage - 1) * this.pagesize + index + 1
+          );
+        },
+      handleSizeChange(val) {
+            this.pagesize=val;
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val;
+        },
+        tranTag(status){
+          switch(status){
+            case -1: return '已取消';
+            case 0: return '新订单';
+            case 1: return '进行中';
+            case 2: return '待报价';
+            case 3: return '待审核';
+            case 4: return '已完成';
+            case 5: return '状态异常';
+          }
+        },
+        tranTagStyle(status){
+          switch(status){
+            case -1: return 'info';
+            case 0: return '';
+            case 1: return 'success';
+            case 2: return 'warning';
+            case 3: return 'warning';
+            case 4: return 'primary';
+            case 5: return 'danger';
+          }
+        },
+        tranTagTheme(status){
+          switch(status){
+            case -1: return 'dark';
+            case 0: return 'light';
+            case 1: return 'dark';
+            case 2: return 'light';
+            case 3: return 'dark';
+            case 4: return 'dark';
+            case 5: return 'dark';
+          }
+        },
+        tranDateStamp(timestamp){
+          return timestamp.substring(0,10)+' '+timestamp.substring(11,19)
+        },
+        countSets (){
+            this.dataSet.map((item,index)=>{
+            switch(item.orderStatus){
+            case -1: return (
+            this.count.Cancel++,
+            this.category.Cancel.push(item)
+            );
+            case 0: return (
+            this.count.NewOrder++,
+            this.category.NewOrder.push(item)
+            );
+            case 1: return (
+            this.count.Processing++,
+            this.category.Processing.push(item)
+            );
+            case 2: return (
+            this.count.Quoting++,
+            this.category.Quoting.push(item)
+            );
+            case 3: return (
+            this.count.Auditing++,
+            this.category.Auditing.push(item)
+            );
+            case 4: return (
+            this.count.Over++,
+            this.category.Over.push(item)
+            );
+            case 5: return (
+            this.count.Abnormity++,
+            this.category.Abnormity.push(item)
+            );
+            }
+            })
+          },
+        countDataSets(status){
+          switch(status){
+            case 'All': return this.dataSet.length;
+            case 'NewOrder': return this.count.NewOrder;
+            case 'Processing': return this.count.Processing;
+            case 'Abnormity': return this.count.Abnormity;
+            case 'Cancel': return this.count.Cancel;
+            case 'Over': return this.count.Over;
+            case 'Quoting': return this.count.Quoting;
+            case 'Auditing': return this.count.Auditing;
+          }
         }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
-      },
-      changingHandle(){
-        this.isChanging = true;
-      },
-      saveHandle(){
-        this.isChanging = false;  
-      }
+        
     },
-    created() {
-      
+    mounted() {
+      this.tmpData = this.dataSet;
+      this.countSets();
     },
     components:{
-    Row, Col, Card, Avatar, Button, Upload
+    Row, Col, Card,  Button,Table, TableColumn,Pagination,Tag
   }
   };
   </script>
   <style lang="less" scoped>
-  .wrapper {
-    #UserInfo {
-      .box-card .card-title{
-        font-size:18px;
-        font-weight: 600;
-        line-height: 20px;
-        padding-top: 0;
-        height:0px;
-      }
-      .box-card .tip-title{
-        height:0px;
-        font-size:12px;
-        font-weight: 400;
-        color: #F00;
-        line-height: 20px;
-        padding-top: 0;
-      }
-      .box-card .avatarColumn{ 
-        span{
-          float:right
-        }
-        .avatar-uploader{
-          height:18px;
-          width:18px;
-          margin:10px auto;
-          border:solid;
-          border-color:#acaaaa;
-          border-radius:100px;
-          padding:50px;
-        }
-      }
-      .box-card .infoColumn{
-        margin : 0 auto;
-        .infoTitle{
-          font-size:18px;
-          font-weight: 600;
-          .infoSubTitle{
-          font-size:15px;
-          font-weight: 600;
-        }
-        .infoContent{
-          font-size:14px;
-          line-height: 20px;
-          height:24px;
-          font-weight: 400;
-        }
-        .infoInput{
-          height:24px;
-          width: 95%;
-        }
-        }
-        .infoContent{
-          font-size:14px;
-          font-weight: 400;
-        }
-        .infoOperation{
-          margin: -100px 0; 
-          .infoBtn{
-            border-radius: 30px;
-            width:150px;
+      .wrapper {
+        #AdminCenter{
+          .pagination{
+            position: relative;
+            bottom: 20px;
           }
         }
-      }
-      h2 {
-        margin: 50px auto 30px;
-        text-align: center;
-        color: #3b3c3f;
-        font-size: 1.8em;
-      }
-      div {
-        margin-bottom: 30px;
-        h3 {
-          width: 1200px;
-          margin: auto;
-          text-align: left;
-          padding-bottom: 20px;
-          color: #333333;
-        }
-        ul {
-          margin: auto;
-          width: 1200px;
-          height: auto;
-          overflow: hidden;
-          li {
-            width: 194px;
-            height: 60px;
-            margin: 10px 20px;
-            float: left;
-            text-align: center;
-            line-height: 60px;
-            border: 3px solid #666666;
-            border-radius: 18px;
-            a {
-              width: 100%;
-              height: 100%;
-              display: block;
-              color: #666666;
-              font-size: 1.1em;
-            }
-            &:hover {
-              border: 3px solid #0092ff;
-            }
-          }
-        }
-      }
-    }
-  
     @media screen and (max-width: 1200px) {
       #UserInfo {
       .box-card .card-title{
