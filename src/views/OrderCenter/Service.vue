@@ -42,12 +42,12 @@
                 </el-row>
 
                 <el-row :row="2" class="list-tips">经我司处理后,贵司油基岩土壤残油率将会低于: <span>{{Services[serviceType].standard}} </span></el-row>
-                <el-row :row="2" class="list-subtips"><el-col :span="14">处理费用:  <span>{{ this.unitPrice*this.requirement }}</span> </el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
-                <el-row :row="2" class="list-subtips"><el-col :span="14">运输距离:  <span>{{ Math.round(100*this.distance/1000)/100 }} </span> </el-col>   <el-col :span="6">(公里/km)</el-col></el-row>
-                <el-row :row="2" class="list-subtips"><el-col :span="14">运输费用: <span>{{ Math.round(0.83*(this.distance/1000)*this.requirement*100)/100 }}</span> </el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
-                <el-row :row="2" class="list-subtips"><el-col :span="14">总计费用:  <span>{{ Math.round((this.unitPrice*this.requirement + 0.83*(this.distance/1000)*this.requirement )*100)/100 }}</span></el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
+                <el-row :row="2" class="list-subtips"><el-col :span="18">处理费用:  <span>{{ this.unitPrice*this.requirement }}</span> </el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
+                <el-row :row="2" class="list-subtips"><el-col :span="18">运输距离:  <span>{{ Math.round(100*this.distance/1000)/100 }} </span> </el-col>   <el-col :span="6">(公里/km)</el-col></el-row>
+                <el-row :row="2" class="list-subtips"><el-col :span="18">运输费用: <span>{{ Math.round(0.83*(this.distance/1000)*this.requirement*100)/100 }}</span> </el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
+                <el-row :row="2" class="list-subtips"><el-col :span="18">总计费用:  <span>{{ Math.round((this.unitPrice*this.requirement + 0.83*(this.distance/1000)*this.requirement )*100)/100 }}</span></el-col>   <el-col :span="6">(元/￥)</el-col></el-row>
               <el-row :row="4" class="control-btn">
-                       <button class="submit-btn">提交订单</button>
+                       <button class="submit-btn" @click="submitServiceOrder">提交订单</button>
                </el-row>
               </el-card>
               </el-col>  
@@ -58,7 +58,7 @@
   </template>
   
   <script>
-import { Row, Col, Card,Button, Radio,RadioGroup} from 'element-ui'
+import { Row, Col, Card,Button, Radio,RadioGroup,Message} from 'element-ui'
   export default {
     metaInfo: {
       title:
@@ -178,6 +178,12 @@ import { Row, Col, Card,Button, Radio,RadioGroup} from 'element-ui'
         },
     },
     methods:{
+      submitServiceOrder(){
+        Message({
+          message:'提交订单成功!',
+          type:'success'
+        })
+      },
   handleRadioSelect(val){
     this.unitPrice = val.unitPrice;
   },
@@ -242,6 +248,7 @@ onInputHandle(e){
       
     },
     components:{
+    Message,
     Row,
     Col,
     Card,
@@ -331,7 +338,7 @@ onInputHandle(e){
           }
       }
       .control-btn .submit-btn{
-        margin:70px 10% 0 10%;
+        margin:30px 10% 0 10%;
         width:280px;
         height:48px;
         border-color:aquamarine;

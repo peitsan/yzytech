@@ -54,7 +54,7 @@ Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Radio);    
 Vue.use(Loading.directive);
-Vue.use(Message);
+// Vue.use(Message);
 Vue.use(Upload);
 Vue.use(Card);
 Vue.use(Container);

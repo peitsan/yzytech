@@ -8,10 +8,11 @@
           </el-tabs>
           <!-- 表格组件 -->
         <el-table
+        max-height="400"
         :data="tmpData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
         :stripe="stripe"
         :current-page.sync="currentPage"
-        style="width: 100%;height: 400px;">
+        style="width: 100%;height: 600px;">
         <el-table-column
             type="index"
             label="序号"
@@ -90,7 +91,7 @@
   </template>
   
   <script>
-import { Row, Col, Card, Button,Table, TableColumn, Pagination,Tag} from 'element-ui'
+import { Row, Col, Card, Button,Table, TableColumn, Pagination,Tag,Message} from 'element-ui'
 import { GetAllOrder }  from '@/api/api.js'
 export default {
     metaInfo: {
@@ -145,88 +146,77 @@ export default {
           name:"Auditing",
         }
       ],
-        dataSet:[{
-          orderStatus:0, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
-          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
-          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
-          contactsPerson:"刘启", //联系人
-          contactsAddress:"成都锦江", //联系地址
-          customCompany:"圣都装饰", //客户单位
-          transactionAmount:351, //成交价
-          shipmentAmount:101,  //发货额
-          unreceivedAmount:351, //未收款
-          grossProfitRate:-5.718, //毛利率
-        },{
-          orderStatus:1, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成  5为状态异常 -1为已取消
-          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
-          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
-          contactsPerson:"刘启", //联系人
-          contactsAddress:"成都锦江", //联系地址
-          customCompany:"圣都装饰", //客户单位
-          transactionAmount:351, //成交价
-          shipmentAmount:101,  //发货额
-          unreceivedAmount:351, //未收款
-          grossProfitRate:-5.718, //毛利率
-        },{
-          orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
-          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
-          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
-          contactsPerson:"刘启", //联系人
-          contactsAddress:"成都锦江", //联系地址
-          customCompany:"圣都装饰", //客户单位
-          transactionAmount:351, //成交价
-          shipmentAmount:101,  //发货额
-          unreceivedAmount:351, //未收款
-          grossProfitRate:-5.718, //毛利率
-        },{
-          orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
-          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
-          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
-          contactsPerson:"刘启", //联系人
-          contactsAddress:"成都锦江", //联系地址
-          customCompany:"圣都装饰", //客户单位
-          transactionAmount:351, //成交价
-          shipmentAmount:101,  //发货额
-          unreceivedAmount:351, //未收款
-          grossProfitRate:-5.718, //毛利率
-        },{
-          orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
-          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
-          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
-          contactsPerson:"刘启", //联系人
-          contactsAddress:"成都锦江", //联系地址
-          customCompany:"圣都装饰", //客户单位
-          transactionAmount:351, //成交价
-          shipmentAmount:101,  //发货额
-          unreceivedAmount:351, //未收款
-          grossProfitRate:-5.718, //毛利率
-        },{
-          orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
-          orderSerialNumber: "AP22358269",//订单号（序列号唯一）
-          orderStartTime:"2022-03-09T20:07:59Z",//下单时间
-          contactsPerson:"刘启", //联系人
-          contactsAddress:"成都锦江", //联系地址
-          customCompany:"圣都装饰", //客户单位
-          transactionAmount:351, //成交价
-          shipmentAmount:101,  //发货额
-          unreceivedAmount:351, //未收款
-          grossProfitRate:-5.718, //毛利率
-        }
+      dataSet:[],
+      //   dataSet:[{
+      //     orderStatus:0, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+      //     orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+      //     orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+      //     contactsPerson:"刘启", //联系人
+      //     contactsAddress:"成都锦江", //联系地址
+      //     customCompany:"圣都装饰", //客户单位
+      //     transactionAmount:351, //成交价
+      //     shipmentAmount:101,  //发货额
+      //     unreceivedAmount:351, //未收款
+      //     grossProfitRate:-5.718, //毛利率
+      //   },{
+      //     orderStatus:1, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成  5为状态异常 -1为已取消
+      //     orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+      //     orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+      //     contactsPerson:"刘启", //联系人
+      //     contactsAddress:"成都锦江", //联系地址
+      //     customCompany:"圣都装饰", //客户单位
+      //     transactionAmount:351, //成交价
+      //     shipmentAmount:101,  //发货额
+      //     unreceivedAmount:351, //未收款
+      //     grossProfitRate:-5.718, //毛利率
+      //   },{
+      //     orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+      //     orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+      //     orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+      //     contactsPerson:"刘启", //联系人
+      //     contactsAddress:"成都锦江", //联系地址
+      //     customCompany:"圣都装饰", //客户单位
+      //     transactionAmount:351, //成交价
+      //     shipmentAmount:101,  //发货额
+      //     unreceivedAmount:351, //未收款
+      //     grossProfitRate:-5.718, //毛利率
+      //   },{
+      //     orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+      //     orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+      //     orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+      //     contactsPerson:"刘启", //联系人
+      //     contactsAddress:"成都锦江", //联系地址
+      //     customCompany:"圣都装饰", //客户单位
+      //     transactionAmount:351, //成交价
+      //     shipmentAmount:101,  //发货额
+      //     unreceivedAmount:351, //未收款
+      //     grossProfitRate:-5.718, //毛利率
+      //   },{
+      //     orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+      //     orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+      //     orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+      //     contactsPerson:"刘启", //联系人
+      //     contactsAddress:"成都锦江", //联系地址
+      //     customCompany:"圣都装饰", //客户单位
+      //     transactionAmount:351, //成交价
+      //     shipmentAmount:101,  //发货额
+      //     unreceivedAmount:351, //未收款
+      //     grossProfitRate:-5.718, //毛利率
+      //   },{
+      //     orderStatus:4, //订单状态  0为新订单 1为进行中 2为待报价 3为待审核 4为已完成 5为状态异常 -1为已取消
+      //     orderSerialNumber: "AP22358269",//订单号（序列号唯一）
+      //     orderStartTime:"2022-03-09T20:07:59Z",//下单时间
+      //     contactsPerson:"刘启", //联系人
+      //     contactsAddress:"成都锦江", //联系地址
+      //     customCompany:"圣都装饰", //客户单位
+      //     transactionAmount:351, //成交价
+      //     shipmentAmount:101,  //发货额
+      //     unreceivedAmount:351, //未收款
+      //     grossProfitRate:-5.718, //毛利率
+      //   }
       
-      ],
+      // ],
         tmpData:[],
-        tmpInfo:{
-          avatar:"https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-          userName:"临裴惨",
-          tel:"+86 18025597877",
-          mail:"linpeican@lanshan.email",
-          userType:"1", //用户类型, 0为普通用户,1为企业认证用户, 2为公司员工,3为公司超级管理员
-          enterpiseName:"信息化办蓝山工作室",//企业名称
-          department:"前端研发部", //所属公司部门
-          enterpiseType:"计算机/互联网/网络技术", //行业分类
-          jobs:"前端", //工作/岗位
-          address:"",//公司地址
-          },
           count:{
           NewOrder: 0,
           Processing: 0,
@@ -267,7 +257,16 @@ export default {
     methods:{
       async GetAllOrder(){
         let res = await GetAllOrder();
-        console.log(res);
+        if(res.status == 200){
+          this.dataSet = res.data;
+          this.tmpData = this.dataSet;
+          this.countSets();
+        }else{
+          Message({
+          message: '服务器匆忙,请稍后重试!',
+          type: 'error'
+         })
+        }
       },
       indexMethod(index) {
           return (
@@ -352,6 +351,7 @@ export default {
             })
           },
         countDataSets(status){
+          this.total = this.dataSet.length;
           switch(status){
             case 'All': return this.dataSet.length;
             case 'NewOrder': return this.count.NewOrder;
@@ -366,21 +366,29 @@ export default {
         
     },
     mounted() {
-      this.tmpData = this.dataSet;
       this.GetAllOrder();
-      this.countSets();
     },
     components:{
-    Row, Col, Card,  Button,Table, TableColumn,Pagination,Tag
+    Row, Col, Card,  Button,Table, TableColumn,Pagination,Tag,Message
   }
   };
   </script>
   <style lang="less" scoped>
       .wrapper {
         #AdminCenter{
+          height: 600px;
+          ::-webkit-scrollbar {
+       display: none; /* Chrome Safari */
+      }
+      scrollbar-width: none; /* firefox */
+   -ms-overflow-style: none; /* IE 10+ */
           .pagination{
+            height: 100px;
             position: relative;
-            bottom: 20px;
+            top: 20px;
+          }
+          .el-tabs__content{
+            display:none;
           }
         }
     @media screen and (max-width: 1200px) {

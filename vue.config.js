@@ -2,7 +2,7 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin');
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 const path = require('path');
 const WEBPACK_CONFIG_HOST = 'http://139.9.81.3:8088'
-// const WEBPACK_CONFIG_HOST = '139.9.81.3:8088'
+// const WEBPACK_CONFIG_HOST = 'localhost:8088' //线上环境
 module.exports = {
     assetsDir: "static", //静态资源打包到static文件夹
     productionSourceMap: false,

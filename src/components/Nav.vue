@@ -208,6 +208,7 @@ export default {
         // 注销登录
         loginOut(){
           sessionStorage.clear();
+          this.$store.state.userInfo.isLogin=false;
           this.isLogin = false;
         },
         modalCloseHandle(val){

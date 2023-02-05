@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
       <div id="AdminCenter">
-      <el-tabs v-model="tabView">
-          <el-tab-pane label="订单管理" name="Consumption"></el-tab-pane>
+      <el-tabs v-model="tabView" class="el-tabs">
+          <el-tab-pane label="订单管理" name="Consumption" style="display: none;"></el-tab-pane>
       </el-tabs>
       <keep-alive>   
        <component v-bind:is="tabView, tabChange(tabView)" style="background: #FF0000; width: 100%; height: 100%"></component>  
@@ -52,10 +52,18 @@ export default {
 </script>
 <style lang="less" scoped>
 .wrapper {
+ 
   #AdminCenter {
     height: 600px;
     width: 80%;
     margin:2% 10%;
+    .el-tabs .el-tabs--top{
+      height:80px;
+      .el-tabpane .el-tabs__content{
+      display: none !important;
+    }
+    }
+    
     h2 {
       margin: 50px auto 30px;
       text-align: center;

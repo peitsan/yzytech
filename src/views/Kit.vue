@@ -6,7 +6,8 @@
         <h3 v-text="item.itemClass"></h3>
         <ul>
           <li v-for="(item2,index2) in item.list" :key="index2">
-            <a :href="item2.href" v-text="item2.title"></a>
+            <a v-if="!isLogin" @click="alertUnlogin" v-text="item2.title"></a>
+            <a  v-if="isLogin" :href="item2.href" v-text="item2.title"></a>
             <!-- <router-link :to="{ name:'register',params:{'name':'San'} }">{{item2.title}}</router-link> -->
           </li>
         </ul>
@@ -16,7 +17,18 @@
 </template>
 
 <script>
+import { Message } from 'element-ui';
 export default {
+  watch:{
+    $store: {
+        handler(newVal, oldVal) {
+          console.log(newVal);
+          this.isLogin = this.$store.state.userInfo.isLogin;
+        },
+        deep: true,
+        immediate: true
+        },
+  },
   metaInfo: {
     title:
       "产品服务-油之岩科技-废油处置方案定制-智慧采购-数字合同-合作流程",
@@ -34,6 +46,7 @@ export default {
   },
   data() {
     return {
+      isLogin:false,
       kitItem: [
         {
           itemClass: "产品服务:",
@@ -60,17 +73,25 @@ export default {
       ]
     };
   },
-  created() {
-    // axios获取首页数据
-    this.$axios
-      .get("api/kit")
-      .then(res => {
-        // console.log(res.data);
-        this.kitItem = res.data.kitItem;
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+  methods:{
+    alertUnlogin(){
+      if(!this.isLogin)
+      Message({
+              message:'暂未登录,无法使用本功能!',
+              type:'error'
+            })
+    }
+  },  
+  mounted(){
+      let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+      if (null === userInfo) return;
+      if (userInfo.isLogin) {
+        this.$store.state.userInfo = userInfo;
+      this.isLogin = this.$store.state.userInfo.isLogin;
+      }
+    },
+  components:{
+    Message,
   }
 };
 </script>
