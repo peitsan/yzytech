@@ -15,10 +15,14 @@ specifiers:
   prerender-spa-plugin: ^3.4.0
   vue: ^2.6.11
   vue-axios: ^2.1.5
+  vue-baidu-map: ^0.21.22
+  vue-carousel-3d: ^1.0.1
   vue-lazyload: ^1.3.3
   vue-meta-info: ^0.1.7
+  vue-monoplasty-slide-verify: ^1.3.1
   vue-router: ^3.2.0
   vue-template-compiler: ^2.6.11
+  vuex: '3'
 
 dependencies:
   axios: registry.npmmirror.com/axios/0.19.2
@@ -27,8 +31,12 @@ dependencies:
   prerender-spa-plugin: registry.npmmirror.com/prerender-spa-plugin/3.4.0
   vue: registry.npmmirror.com/vue/2.7.14
   vue-axios: registry.npmmirror.com/vue-axios/2.1.5_vue@2.7.14
+  vue-baidu-map: registry.npmmirror.com/vue-baidu-map/0.21.22_vue@2.7.14
+  vue-carousel-3d: registry.npmmirror.com/vue-carousel-3d/1.0.1
   vue-meta-info: registry.npmmirror.com/vue-meta-info/0.1.7
+  vue-monoplasty-slide-verify: registry.npmmirror.com/vue-monoplasty-slide-verify/1.3.1
   vue-router: registry.npmmirror.com/vue-router/3.6.5_vue@2.7.14
+  vuex: registry.npmmirror.com/vuex/3.6.2_vue@2.7.14
 
 devDependencies:
   '@vue/cli-plugin-babel': registry.npmmirror.com/@vue/cli-plugin-babel/4.2.3_4fy3o4f7mz4y5tijvjntgz3hqu
@@ -2749,7 +2757,6 @@ packages:
     version: 1.0.10
     dependencies:
       sprintf-js: registry.npmmirror.com/sprintf-js/1.0.3
-    dev: true
 
   registry.npmmirror.com/arr-diff/4.0.0:
     resolution: {integrity: sha512-YVIQ82gZPGBebQV/a8dar4AitzCQs0jjXwMPZllpXMaGjXPYVUawSxQrRsjhjupyVxEvbHgUmIhKVlND+j02kA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/arr-diff/-/arr-diff-4.0.0.tgz}
@@ -3129,6 +3136,38 @@ packages:
     name: bluebird
     version: 3.7.2
     dev: true
+
+  registry.npmmirror.com/bmaplib.curveline/1.0.0:
+    resolution: {integrity: sha512-9wcFMVhiYxNPqpvsLDAADn3qDhNzXp2mA6VyHSHg2XOAgSooC7ZiujdFhy0sp+0QYjTfJ/MjmLuNoUg2HHxH4Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bmaplib.curveline/-/bmaplib.curveline-1.0.0.tgz}
+    name: bmaplib.curveline
+    version: 1.0.0
+    dev: false
+
+  registry.npmmirror.com/bmaplib.heatmap/1.0.4:
+    resolution: {integrity: sha512-rmhqUARBpUSJ9jXzUI2j7dIOqnc38bqubkx/8a349U2qtw/ulLUwyzRD535OrA8G7w5cz4aPKm6/rNvUAarg/Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bmaplib.heatmap/-/bmaplib.heatmap-1.0.4.tgz}
+    name: bmaplib.heatmap
+    version: 1.0.4
+    dev: false
+
+  registry.npmmirror.com/bmaplib.lushu/1.0.7:
+    resolution: {integrity: sha512-LVvgpESPii6xGxyjnQjq8u+ic4NjvhdCPV/RiSS/PGTUdZKeTDS7prSpleJLZH3ES0+oc0gYn8bw0LtPYUSz2w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bmaplib.lushu/-/bmaplib.lushu-1.0.7.tgz}
+    name: bmaplib.lushu
+    version: 1.0.7
+    dev: false
+
+  registry.npmmirror.com/bmaplib.markerclusterer/1.0.13:
+    resolution: {integrity: sha512-VrLyWSiuDEVNi0yUfwOhFQ6z1oEEHS4w36GNu3iASu6p52QIx9uAXMUkuSCHReNR0bj2Cp9SA1dSx5RpojXajQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bmaplib.markerclusterer/-/bmaplib.markerclusterer-1.0.13.tgz}
+    name: bmaplib.markerclusterer
+    version: 1.0.13
+    dependencies:
+      bmaplib.texticonoverlay: registry.npmmirror.com/bmaplib.texticonoverlay/1.0.2
+    dev: false
+
+  registry.npmmirror.com/bmaplib.texticonoverlay/1.0.2:
+    resolution: {integrity: sha512-4ZTWr4ZP3B6qEWput5Tut16CfZgII38YwM3bpyb4gFTQyORlKYryFp9WHWrwZZaHlOyYDAXG9SX0hka43jTADg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bmaplib.texticonoverlay/-/bmaplib.texticonoverlay-1.0.2.tgz}
+    name: bmaplib.texticonoverlay
+    version: 1.0.2
+    dev: false
 
   registry.npmmirror.com/bn.js/4.12.0:
     resolution: {integrity: sha512-c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bn.js/-/bn.js-4.12.0.tgz}
@@ -5301,6 +5340,12 @@ packages:
       memory-fs: registry.npmmirror.com/memory-fs/0.5.0
       tapable: registry.npmmirror.com/tapable/1.1.3
     dev: true
+
+  registry.npmmirror.com/entities/1.1.2:
+    resolution: {integrity: sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/entities/-/entities-1.1.2.tgz}
+    name: entities
+    version: 1.1.2
+    dev: false
 
   registry.npmmirror.com/entities/2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/entities/-/entities-2.2.0.tgz}
@@ -7762,6 +7807,14 @@ packages:
     version: 1.2.4
     dev: true
 
+  registry.npmmirror.com/linkify-it/2.2.0:
+    resolution: {integrity: sha512-GnAl/knGn+i1U/wjBz3akz2stz+HrHLsxMwHQGofCDfPvlf+gDKN58UtfmUquTY4/MXeE2x7k19KQmeoZi94Iw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/linkify-it/-/linkify-it-2.2.0.tgz}
+    name: linkify-it
+    version: 2.2.0
+    dependencies:
+      uc.micro: registry.npmmirror.com/uc.micro/1.0.6
+    dev: false
+
   registry.npmmirror.com/loader-runner/2.4.0:
     resolution: {integrity: sha512-Jsmr89RcXGIwivFY21FcRrisYZfvLMTWx5kOLc+JTxtpBOG6xML0vzbc6SEQG2FO9/4Fc3wW4LVcB5DmGflaRw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/loader-runner/-/loader-runner-2.4.0.tgz}
     name: loader-runner
@@ -7998,6 +8051,19 @@ packages:
     dependencies:
       object-visit: registry.npmmirror.com/object-visit/1.0.1
 
+  registry.npmmirror.com/markdown-it/8.4.2:
+    resolution: {integrity: sha512-GcRz3AWTqSUphY3vsUqQSFMbgR38a4Lh3GWlHRh/7MRwz8mcu9n2IO7HOh+bXHrR9kOPDl5RNCaEsrneb+xhHQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/markdown-it/-/markdown-it-8.4.2.tgz}
+    name: markdown-it
+    version: 8.4.2
+    hasBin: true
+    dependencies:
+      argparse: registry.npmmirror.com/argparse/1.0.10
+      entities: registry.npmmirror.com/entities/1.1.2
+      linkify-it: registry.npmmirror.com/linkify-it/2.2.0
+      mdurl: registry.npmmirror.com/mdurl/1.0.1
+      uc.micro: registry.npmmirror.com/uc.micro/1.0.6
+    dev: false
+
   registry.npmmirror.com/md5.js/1.3.5:
     resolution: {integrity: sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/md5.js/-/md5.js-1.3.5.tgz}
     name: md5.js
@@ -8019,6 +8085,12 @@ packages:
     name: mdn-data
     version: 2.0.4
     dev: true
+
+  registry.npmmirror.com/mdurl/1.0.1:
+    resolution: {integrity: sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/mdurl/-/mdurl-1.0.1.tgz}
+    name: mdurl
+    version: 1.0.1
+    dev: false
 
   registry.npmmirror.com/media-typer/0.3.0:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/media-typer/-/media-typer-0.3.0.tgz}
@@ -10962,7 +11034,6 @@ packages:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sprintf-js/-/sprintf-js-1.0.3.tgz}
     name: sprintf-js
     version: 1.0.3
-    dev: true
 
   registry.npmmirror.com/sshpk/1.17.0:
     resolution: {integrity: sha512-/9HIEs1ZXGhSPE8X6Ccm7Nam1z8KcoCqPdI7ecm1N33EzAetWahvQWVqLZtaZQ+IDKX4IyA2o0gBzqIMkAagHQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sshpk/-/sshpk-1.17.0.tgz}
@@ -11569,6 +11640,12 @@ packages:
     name: typedarray
     version: 0.0.6
 
+  registry.npmmirror.com/uc.micro/1.0.6:
+    resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/uc.micro/-/uc.micro-1.0.6.tgz}
+    name: uc.micro
+    version: 1.0.6
+    dev: false
+
   registry.npmmirror.com/uglify-js/3.4.10:
     resolution: {integrity: sha512-Y2VsbPVs0FIshJztycsO2SfPk7/KAF/T72qzv9u5EpQ4kB2hQoHlhNQTsNyy6ul7lQtqJN/AoWeS23OzEiEFxw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/uglify-js/-/uglify-js-3.4.10.tgz}
     name: uglify-js
@@ -11935,6 +12012,31 @@ packages:
       vue: registry.npmmirror.com/vue/2.7.14
     dev: false
 
+  registry.npmmirror.com/vue-baidu-map/0.21.22_vue@2.7.14:
+    resolution: {integrity: sha512-WQMPCih4UTh0AZCKKH/OVOYnyAWjfRNeK6BIeoLmscyY5aF8zzlJhz/NOHLb3mdztIpB0Z6aohn4Jd9mfCSjQw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-baidu-map/-/vue-baidu-map-0.21.22.tgz}
+    id: registry.npmmirror.com/vue-baidu-map/0.21.22
+    name: vue-baidu-map
+    version: 0.21.22
+    peerDependencies:
+      vue: ^2.1.8
+    dependencies:
+      bmaplib.curveline: registry.npmmirror.com/bmaplib.curveline/1.0.0
+      bmaplib.heatmap: registry.npmmirror.com/bmaplib.heatmap/1.0.4
+      bmaplib.lushu: registry.npmmirror.com/bmaplib.lushu/1.0.7
+      bmaplib.markerclusterer: registry.npmmirror.com/bmaplib.markerclusterer/1.0.13
+      markdown-it: registry.npmmirror.com/markdown-it/8.4.2
+      vue: registry.npmmirror.com/vue/2.7.14
+    dev: false
+
+  registry.npmmirror.com/vue-carousel-3d/1.0.1:
+    resolution: {integrity: sha512-Q50gIEB6plLdqYd3jLxte8RJsXNPQBcrRsgUey7nnaQ7TvtFoRu/4rpPP1FiihahE0v+IzVv8LLSSJxD+XrQVQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-carousel-3d/-/vue-carousel-3d-1.0.1.tgz}
+    name: vue-carousel-3d
+    version: 1.0.1
+    dependencies:
+      core-js: registry.npmmirror.com/core-js/3.27.1
+      vue: registry.npmmirror.com/vue/2.7.14
+    dev: false
+
   registry.npmmirror.com/vue-hot-reload-api/2.3.4:
     resolution: {integrity: sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz}
     name: vue-hot-reload-api
@@ -12047,6 +12149,15 @@ packages:
       - rollup
     dev: false
 
+  registry.npmmirror.com/vue-monoplasty-slide-verify/1.3.1:
+    resolution: {integrity: sha512-oMP9RdBo/2M2D8CcEE1IJCXKWOGPUyFNKFgMwj8+BMEA5Je4wF3jUbCnQe/hNNmV1cUBdeTNp0w/TdlP1A96SQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-monoplasty-slide-verify/-/vue-monoplasty-slide-verify-1.3.1.tgz}
+    name: vue-monoplasty-slide-verify
+    version: 1.3.1
+    engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
+    dependencies:
+      vue: registry.npmmirror.com/vue/2.7.14
+    dev: false
+
   registry.npmmirror.com/vue-router/2.8.1_vue@2.7.14:
     resolution: {integrity: sha512-MC4jacHBhTPKtmcfzvaj2N7g6jgJ/Z/eIjZdt+yUaUOM1iKC0OUIlO/xCtz6OZFFTNUJs/1YNro2GN/lE+nOXA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-2.8.1.tgz}
     id: registry.npmmirror.com/vue-router/2.8.1
@@ -12100,6 +12211,17 @@ packages:
     dependencies:
       '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/2.7.14
       csstype: registry.npmmirror.com/csstype/3.1.1
+
+  registry.npmmirror.com/vuex/3.6.2_vue@2.7.14:
+    resolution: {integrity: sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vuex/-/vuex-3.6.2.tgz}
+    id: registry.npmmirror.com/vuex/3.6.2
+    name: vuex
+    version: 3.6.2
+    peerDependencies:
+      vue: ^2.0.0
+    dependencies:
+      vue: registry.npmmirror.com/vue/2.7.14
+    dev: false
 
   registry.npmmirror.com/watchpack-chokidar2/2.0.1:
     resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/watchpack-chokidar2/-/watchpack-chokidar2-2.0.1.tgz}

@@ -53,6 +53,7 @@
 
 <script> 
   import { Login } from '@/api/api'
+  import { setToken } from '@/utils/auth.js'
   import { Form , FormItem, Input ,Message} from 'element-ui'
   export default {
     props: {
@@ -92,25 +93,27 @@
         let res = await Login(this.userInfo);
         console.log(res);
        if(res.status == 200){
-        if(res.data.code == 200){
-        Message({
-          message: res.data.message,
-          type: 'success'
-        });
-        this.$emit(hasLogin,true)
-        }
+         if(res.data.code == 200){
+          // 登录成功
+            Message({
+              message: res.data.message,
+              type: 'success'
+            });
+            setToken(res.data.token);
+            this.$emit("hasLogin",true)
+            console.log('0');
+         }
         else if(res.data.code == 400){
         Message({
           message: res.data.message,
-          type: 'danger'
+          type: 'error'
         });
-        this.$emit(hasLogin,true)
         }
         else{
               tryTimes++;
               this.$message({
                 message: '登录失败!',
-                type: 'danger'
+                type: 'error'
                });
             }
        }
@@ -125,7 +128,7 @@
           Message({
                 showClose: true,
                 message: '请输入合法电子邮箱账号!',
-                type: 'danger'
+                type: 'error'
               });
             }
       },

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
+import store from './store/index'
 // 滑块验证码控件
 import SlideVerify from '../node_modules/vue-monoplasty-slide-verify' // 拼图验证码
 Vue.use(SlideVerify)
@@ -110,6 +110,7 @@ Vue.prototype.$axios = axios;
 
 new Vue({
   router,
+  store,
   render: h => h(App),
   mounted() {
     // seo优化预渲染

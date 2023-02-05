@@ -109,8 +109,12 @@
                   <el-col :span="8" class="dialist-text">人名币/￥</el-col>
               </el-row>
               <el-row :row="4" >
-                  <el-button type="primary" size="middle" style="float:right">订购</el-button>
-              </el-row>
+                <el-popconfirm
+                  title="确认下单吗？"
+                  @confirm="submitOrder()">
+                   <el-button slot="reference" type="primary" size="middle" style="float:right">订购</el-button>
+                  </el-popconfirm>
+                </el-row>
           </el-col>
         </el-row>
       </el-dialog>~
@@ -215,6 +219,7 @@
   </template>
   
   <script>
+  import { PostNewOrder, GetAllProductions } from '@/api/api.js'
   import { Row, Col, Card, Avatar, Button, Upload, Carousel, CarouselItem, Popconfirm, Dialog,Table, TableColumn,Tag,Pagination} from 'element-ui'
   
   export default {
@@ -254,6 +259,7 @@
           customCompany:'',
           amount:0,
           transactionAmount:'',
+          unpayAmount:200,
         },
         Commodity:[
           {
@@ -391,6 +397,39 @@
       };
     },
     methods:{
+      async submitOrder() {
+        let order = {
+          "contactsPerson":this.$store.state.userInfo.name,
+          "contactsAddress":this.$store.state.userInfo.contactsAddress,
+          "customCompany":this.$store.state.userInfo.customCompany,
+          "transactionAmount":parseInt(this.order.transactionAmount), 
+          "shipmentAmount":(this.order.transactionAmount-this.order.unpayAmount) , //还没写
+          "unreceivedAmount":parseInt(this.order.unpayAmount),
+          "grossProfitRate": (- this.order.unpayAmount / this.order.transactionAmount),
+          }
+        console.log(order)
+        let res = await PostNewOrder(order);
+        if(res && res.status == 200){
+          // 提交成功
+          if(res.data.code == 200){ 
+            Message({
+              message: res.data.message,
+              type: 'success'
+            })
+          }else if(res.data.code == 500){
+            Message({
+          message: '服务器匆忙,请稍后重试!',
+          type: 'error'
+         })
+          }
+          else{
+            Message({
+            message: '网络异常,请稍后重试!',
+            type: 'error'
+          })
+          }
+        }
+      },
       indexMethod(index) {
           return (
             // 索引分页自增累加，   (当前页-1)*每页显示的条数+table索引+1
@@ -431,8 +470,10 @@
         // console.log(this.shopCarList);
       }
     },
-    created() {
-      
+    mounted() {
+        GetAllProductions().then(res=>{
+          console.log(res);
+        })
     },
     components:{
     Row,

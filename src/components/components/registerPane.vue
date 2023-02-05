@@ -114,36 +114,37 @@ async submitRegister(){
   if(isEmail(this.userInfo.email)){
     if(this.userInfo.password === this.rePassword){
         let res = await Register(this.userInfo);
-        if(res.status == 200){
-          if(res.data.code == 200) 
-        Message({
-          message: res.data.message,
-          type: 'success'
-        })
+        if(res && res.status == 200){
+          // 注册成功
+          if(res.data.code == 200){ 
+            Message({
+              message: res.data.message,
+              type: 'success'
+            })
+            this.$emit("hasRegister",true);
+          }
         else{
           Message({
           message: '注册失败,请检查后重试!',
-          type: 'danger'
+          type: 'error'
         })
         }
         }else{
           Message({
           message: '网络匆忙,请稍后重试!',
-          type: 'warning'
+          type: 'error'
         });
         }
       }else{
         Message({
-          showClose: true,
           message: '两次密码输入不一致,请重新输入!',
-          type: 'danger'
+          type: 'error'
         });
       }
   }else{
     Message({
-          showClose: true,
           message: '请输入合法电子邮箱账号!',
-          type: 'danger'
+          type: 'error'
         });
       }
  
@@ -171,7 +172,7 @@ handler(newVal, oldVal) {
   this.registerModalValue = newVal;
   if(newVal){
     this.ModalStatus = true;
-  }
+    }
 },
 immediate: true
 }

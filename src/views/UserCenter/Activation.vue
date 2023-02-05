@@ -1,16 +1,37 @@
 <template>
     <div class="wrapper">
         <div id="UserInfo">
-        <div class="height:600px;width:1000px; padding:20% 5%">
-            <h2> 尊敬的客户,欢迎使用重庆油之岩科技数字平台! </h2>
-            <h3> 即将为您跳转到网站首页,若没有跳转,请<a href="https://youzhiyan.com/">点击这里</a>! </h3>
+        <div style="height:500px;padding:2% 5%;width:100%;">
+          <el-card  style="height:200px;width:80%;padding:10% 5%;text-align:center">  
+          <div
+            style=" 
+            margin: 50px auto 30px;
+            text-align: center;
+             color: #3b3c3f;
+            font-size: 2.4em;"
+            > 尊敬的客户,欢迎使用重庆油之岩科技数字平台! </div>
+          <div v-if="this.status === 'activating'">
+            <div style=" 
+            margin: 30px auto 30px;
+            text-align: center;
+           color: #a9a9a9;
+            font-size: 2em;"> 请及时前往注册邮箱激活账号,激活邮件有效期为5小时! </div>
+          </div>
+          <div v-if="this.status === 'activated'">
+            <div style=" 
+            margin: 30px auto 30px;
+            text-align: center;
+           color: #a9a9a9;
+            font-size: 2em;"> 注册成功!即将为您跳转到网站首页,若没有跳转,请<a href="https://youzhiyan.com/">点击这里</a>! </div>
+          </div>
+        </el-card>
         </div >
         </div>
     </div>
   </template>
-  
   <script>
-  import { Row, Col, Card, Avatar, Button, Upload} from 'element-ui'
+  import { RegisterActivate } from "@/api/api.js"
+  import {  Card, Message} from 'element-ui'
   export default {
     metaInfo: {
       title:
@@ -29,13 +50,40 @@
     },
     data() {
       return {
+        status:'',
+        confirmCode: '',
         imageUrl: '',
         tmpInfo:{
           }
       };
     },
     mounted(){
-
+      this.confirmCode = this.$route.query.confirmCode;
+      console.log(this.$route.query);
+      this.status = 'activating';
+      if(this.$route.query.confirmCode){
+        RegisterActivate(this.$route.query.confirmCode).then(res=>{
+          console.log(res);
+        if(res && res.status == 200){
+          // 注册成功
+          if(res.data.code == 200){ 
+            Message({
+              message: res.data.message,
+              type: 'success'
+            })
+            this.status = 'activated';
+            setTimeout(()=>{
+              this.$router.push('/')
+            },1000)
+          }
+          }else{
+          Message({
+                message: '网络异常,请稍后重试!',
+                type: 'error'
+                    });
+                  }
+        })
+      }
     },
     methods:{
 
@@ -44,86 +92,23 @@
       
     },
     components:{
-    Row, Col, Card, Avatar, Button, Upload
+    Card, Message
   }
   };
   </script>
   <style lang="less" scoped>
   .wrapper {
-    #UserInfo {
-      .box-card .card-title{
-        font-size:18px;
-        font-weight: 600;
-        line-height: 20px;
-        padding-top: 0;
-        height:0px;
-      }
-      .box-card .tip-title{
-        height:0px;
-        font-size:12px;
-        font-weight: 400;
-        color: #F00;
-        line-height: 20px;
-        padding-top: 0;
-      }
-      .box-card .avatarColumn{ 
-        span{
-          float:right
-        }
-        .avatar-uploader{
-          height:18px;
-          width:18px;
-          margin:10px auto;
-          border:solid;
-          border-color:#acaaaa;
-          border-radius:100px;
-          padding:50px;
-        }
-      }
-      .box-card .infoColumn{
-        margin : 0 auto;
-        .infoTitle{
-          margin:12px 0;
-          font-size:18px;
-          font-weight: 600;
-          .infoSubTitle{
-          margin:12px 0;
-          font-size:15px;
-          font-weight: 600;
-        }
-        .infoContent{
-          margin:-4px 0;
-          font-size:14px;
-          line-height: 20px;
-          height:24px;
-          font-weight: 400;
-        }
-        .infoInput{
-          margin-top:-10px;
-          height:0px;
-          width: 95%;
-        }
-        }
-        .infoContent{
-          font-size:14px;
-          font-weight: 400;
-        }
-        .infoOperation{
-          margin: -20px 0; 
-          .infoBtn{
-            border-radius: 30px;
-            width:150px;
-          }
-        }
-      }
+    #UserInfo 
       h2 {
         margin: 50px auto 30px;
         text-align: center;
         color: #3b3c3f;
         font-size: 1.8em;
       }
+
       div {
         margin-bottom: 30px;
+        
         h3 {
           width: 1200px;
           margin: auto;
@@ -131,6 +116,7 @@
           padding-bottom: 20px;
           color: #333333;
         }
+
         ul {
           margin: auto;
           width: 1200px;
@@ -158,7 +144,6 @@
           }
         }
       }
-    }
   
     @media screen and (max-width: 1200px) {
       #UserInfo {
@@ -225,6 +210,12 @@
         text-align: center;
         color: #3b3c3f;
         font-size: 1.8em;
+      }
+      h3{
+        margin: 30px auto 30px;
+        text-align: center;
+        color: #828384;
+        font-size: 1.20em;
       }
       div {
         margin-bottom: 30px;

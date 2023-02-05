@@ -12,12 +12,17 @@
             <el-radio-button label="register"   key="register">注册</el-radio-button>
           </el-radio-group>
         </div>
-    <keep-alive>   
-      <component  @hasLogin="confirmLogin" v-bind:is="tabView, tabChange(FunctionStatus)" style="background: #FF0000; width: 100%; height: 100%"></component>  
+    <keep-alive >   
+      <loginPane  @hasLogin="this.confirmLogin" v-if="this.tabView === 'loginPane'"/>
+      <registerPane @hasRegister="this.confirmRegister" v-if="this.tabView === 'registerPane'"/>
+      <component v-bind:is="tabView, tabChange(FunctionStatus)" style="background: #FF0000; width: 100%; height: 100%">
+      </component>  
     </keep-alive> 
-    </div>  
+    </div>
   </div>
 </el-dialog>
+
+  
 </template>
 <style lang="less">
 .wrap{
@@ -167,12 +172,18 @@
       };
     },
     methods:{
+      confirmRegister(val){
+        this.ModalStatus = false;
+        if(val){
+          this.$router.push('/UserCenter/Activation')
+        }
+      },
       confirmLogin(val){
-        this.$emit(hasLogin,val);
+        this.$emit("hasLogin",val);
+        this.ModalStatus = false;
       },
       // 切换登录注册按钮渲染
       tabChange(tab){
-      console.log("tab："+tab)
       if('register' == tab){
         this.tabView = 'registerPane'
  

@@ -47,3 +47,40 @@ export function Register(params){
         data: params
       })
 }
+
+export function RegisterActivate(params){
+  return request({
+    // 配置请求方式
+      method: 'GET',// GET/POSH
+      // 请求接口地址
+      url: api.registerActivate+`?confirmCode=`+params,
+    })
+}
+
+export function GetAllOrder(){
+  return request({
+    // 配置请求方式
+      method: 'GET',// GET/POSH
+      // 请求接口地址
+      url: api.getAllOrder,
+    })
+}
+
+export function PostNewOrder(params){
+  return request({
+    // 配置请求方式
+      method: 'POST',// GET/POSH
+      // 请求接口地址
+      url: api.createOrder,
+      data:params,
+    })
+}
+// 产品
+export function GetAllProductions(){
+  return request({
+    // 配置请求方式
+      method: 'GET',// GET/POSH
+      // 请求接口地址
+      url: api.getAllProductions,
+    })
+}

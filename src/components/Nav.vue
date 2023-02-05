@@ -191,13 +191,23 @@ export default {
       routerToVerification(){
         this.$router.push('/UserCenter/Enterprise/index')
       },
-      confirmLogin(){
-        this.isLogin = true;
+      confirmLogin(val){
+        let userInfo = {
+            isLogin: true,
+            manage: true,
+            name: 'admin',
+            contactsAddress:'重庆',
+            customCompany:'油之岩科技',
+          };
+          sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+          this.$store.state.userInfo = userInfo
+          console.log('this.$store.state.userInfo', this.$store.state.userInfo)
+        this.isLogin = this.$store.state.userInfo.isLogin;
         // 登录成功回调
       },
         // 注销登录
         loginOut(){
-          console.log('loginout')
+          sessionStorage.clear();
           this.isLogin = false;
         },
         modalCloseHandle(val){
@@ -219,6 +229,14 @@ export default {
             this.navShow = !this.navShow;
             this.navBtnClass = "iconfont icon-daohang1";
         }
+    },
+    mounted(){
+      let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+      if (null === userInfo) return;
+      if (userInfo.isLogin) {
+        this.$store.state.userInfo = userInfo;
+      this.isLogin = this.$store.state.userInfo.isLogin;
+      }
     },
     created() {
         // 将父组件props传递过来的值赋给data中contactWay

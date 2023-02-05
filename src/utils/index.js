@@ -7,7 +7,7 @@ const request = axios.create({
 //配置代理接口
   baseURL: WEBPACK_CONFIG_HOST,
   // 响应时间
-  timeout: 3000
+  timeout: 10000,
 })
 // 暴露
 export default request

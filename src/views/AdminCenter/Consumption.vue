@@ -91,7 +91,8 @@
   
   <script>
 import { Row, Col, Card, Button,Table, TableColumn, Pagination,Tag} from 'element-ui'
-  export default {
+import { GetAllOrder }  from '@/api/api.js'
+export default {
     metaInfo: {
       title:
         "用户中心-油之岩科技-废油处置方案定制-智慧采购-数字合同-合作流程",
@@ -264,6 +265,10 @@ import { Row, Col, Card, Button,Table, TableColumn, Pagination,Tag} from 'elemen
     },
     },
     methods:{
+      async GetAllOrder(){
+        let res = await GetAllOrder();
+        console.log(res);
+      },
       indexMethod(index) {
           return (
             // 索引分页自增累加，   (当前页-1)*每页显示的条数+table索引+1
@@ -362,6 +367,7 @@ import { Row, Col, Card, Button,Table, TableColumn, Pagination,Tag} from 'elemen
     },
     mounted() {
       this.tmpData = this.dataSet;
+      this.GetAllOrder();
       this.countSets();
     },
     components:{
