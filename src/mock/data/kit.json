@@ -1,0 +1,26 @@
+{
+    "kitItem": [
+        {
+            "itemClass": "产品服务:",
+            "list": [
+              {
+                "title": "产品订购",
+                "href": "/OrderCenter/Productions"
+              },
+              {
+                "title": "服务询价",
+                "href": "/OrderCenter/Service"
+              }
+            ]
+          },
+          {
+            "itemClass": "平台管理:",
+            "list": [
+              {
+                "title": "订单管理",
+                "href": "/AdminCenter/Consumption"
+              }
+            ]
+          }
+    ]
+}

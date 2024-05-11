@@ -1,0 +1,67 @@
+{
+    "meta": {
+        "title": "重庆油之岩科技发展有限公司-油基岩屑处置-油基岩油气副产品-处置水平业界领先-双碳减排技术研发-院士专家青睐的油气处置",
+        "keywords": "油基岩屑处置方案,钻井原液,绿化肥料,免烧砖原料,柴油,汽油,教育部智库研发,数字化平台",
+        "description": "描述"
+    },
+    "homeBanner":[
+        {
+          "src": "https://resource.youzhiyan.cn/image/banner1.png",
+          "alt": "业界领先\"油基岩屑处置\"方案服务提供商"
+        },
+        {
+          "src": "https://resource.youzhiyan.cn/image/banner2.png",
+          "alt": "页岩油开采副产品、钻井原液、绿肥、免烧砖原料、柴油汽油"
+        },
+        {
+          "src": "https://resource.youzhiyan.cn/image/banner3.png",
+          "alt": "多位学术泰斗认可推荐,油气处置技术专业研发团队"
+        },
+        {
+          "src": "https://resource.youzhiyan.cn/image/banner4.jpg",
+          "alt": "数字化服务管理平台、智慧+页岩油开采"
+        }
+      ],
+      "ourFriends": [
+        {
+          "src": "https://resource.youzhiyan.cn/image/co1.png",
+          "alt": "油气藏地质及开发工程国家重点实验室",
+          "link": "https://www.swpu.edu.cn/lab/"
+        },
+        {
+           "src": "https://resource.youzhiyan.cn/image/co2.png",
+          "alt": "华为云",
+          "link": "https://activity.huaweicloud.com/"
+        },
+        {
+            "src": "https://resource.youzhiyan.cn/image/co3.png",
+          "alt": "新网数码",
+          "link": "https://www.xinnet.com/"
+        },
+        {
+            "src": "https://resource.youzhiyan.cn/image/co4.png",
+          "alt": "中国科学院重庆绿色智能技术研究院",
+          "link":"http://www.cigit.cas.cn/"
+        },
+        {
+            "src": "https://resource.youzhiyan.cn/image/co5.png",
+          "alt": "西南四校",
+          "link":"https://www.swpu.edu.cn/"
+        },
+        {
+            "src": "https://resource.youzhiyan.cn/image/co6.png",
+          "alt": "eyouspace众创空间",
+          "link":"http://siee.cqupt.edu.cn/"
+        },
+        {
+            "src": "https://resource.youzhiyan.cn/image/co7.png",
+          "alt": "聚购科技",
+          "link":"https://www.juugoo.com/"
+        },
+        {
+          "src": "https://resource.youzhiyan.cn/image/co8.png",
+          "alt": "腾讯公益",
+          "link":"https://gongyi.qq.com/"
+        }
+      ]
+}

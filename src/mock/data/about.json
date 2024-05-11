@@ -1,0 +1,32 @@
+{
+    "companyProfile": {
+        "title": "了解油之岩",
+        "content":  "重庆油之岩科技发展有限公司以资源化利用为核心,致力于油气资源高效低排处置方案创新研发,现为油气处理行业上游提供油基岩屑处置服务方案,同时向下游提供钻井原液、绿化肥料、免烧砖原料、柴油等。"
+    },
+    "publicBenefit": {
+        "title": "公益油我们",
+        "content":  "重庆油之岩科技始终将社会责任作为公司的固本之基,立足西部,扶持弱势,油之岩响应国家号召,致力于热心公益和社会服务项目。油之岩将以科技赋能公益，从油基岩屑处理中秉轴持钧,助力西部开发与环境保护。",
+        "publicBenefitImg": [
+            {
+                "src": "https://resource.youzhiyan.cn/image/publicBenefit (1).jpg",
+                "alt": "为藏区募集救命药"
+            },
+            {
+                "src": "https://resource.youzhiyan.cn/image/publicBenefit%20(2).jpg",
+                "alt": "吉青吉心工程"
+            },
+            {
+                "src": "https://resource.youzhiyan.cn/image/publicBenefit (3).jpg",
+                "alt": "吉青吉心工程"
+            },
+            {
+                "src": "https://resource.youzhiyan.cn/image/publicBenefit (4).jpg",
+                "alt": "吉青吉心工程"
+            },
+            {
+                "src": "https://resource.youzhiyan.cn/image/publicBenefit (5).jpg",
+                "alt": "吉青吉心工程"
+            }
+        ]
+    }
+}
